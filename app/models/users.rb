@@ -8,8 +8,7 @@ class User
         "id" => result["id"].to_i,
         "user_name" => result["user_name"],
         "password" => result["password"],
-        "avatar" => result["avatar"],
-        "post_id" => result["post_id"].to_i
+        "avatar" => result["avatar"]
       }
     end
   end
@@ -20,25 +19,23 @@ class User
         "id" => results.first["id"].to_i,
         "user_name" => results.first["user_name"],
         "password" => results.first["password"],
-        "avatar" => results.first["avatar"],
-        "post_id" => results.first["post_id"].to_i
+        "avatar" => results.first["avatar"]
     }
   end
 
   def self.create(opts)
     results = DB.exec(
         <<-SQL
-            INSERT INTO users (user_name, password, avatar, post_id)
-            VALUES ('#{opts["user_name"]}', '#{opts["password"]}', '#{opts["avatar"]}', #{opts["post_id"]})
-            RETURNING id, user_name, password, avatar, post_id;
+            INSERT INTO users (user_name, password, avatar)
+            VALUES ('#{opts["user_name"]}', '#{opts["password"]}', '#{opts["avatar"]}')
+            RETURNING id, user_name, password, avatar;
         SQL
     )
     return {
         "id" => results.first["id"].to_i,
         "user_name" => results.first["user_name"],
         "password" => results.first["password"],
-        "avatar" => results.first["avatar"],
-        "post_id" => results.first["post_id"].to_i
+        "avatar" => results.first["avatar"]
     }
   end
 
@@ -50,17 +47,16 @@ class User
     results = DB.exec(
         <<-SQL
             UPDATE users
-            SET user_name='#{opts["user_name"]}', password='#{opts["password"]}', avatar='#{opts["avatar"]}', post_id=#{opts["post_id"]}
+            SET user_name='#{opts["user_name"]}', password='#{opts["password"]}', avatar='#{opts["avatar"]}'
             WHERE id=#{id}
-            RETURNING id, user_name, password, avatar, post_id
+            RETURNING id, user_name, password, avatar
         SQL
     )
     return {
         "id" => results.first["id"].to_i,
         "user_name" => results.first["user_name"],
         "password" => results.first["password"],
-        "avatar" => results.first["avatar"],
-        "post_id" => results.first["post_id"].to_i
+        "avatar" => results.first["avatar"]
     }
   end
 end
