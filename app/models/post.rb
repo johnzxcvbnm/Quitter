@@ -11,7 +11,9 @@ class Post
     results = DB.exec(
       <<-SQL
         SELECT *
-        FROM posts;
+        FROM posts
+        JOIN users
+        ON posts.user_id = users.id;
       SQL
     )
     return results.map do |result|
@@ -19,7 +21,9 @@ class Post
         "id" => result["id"].to_i,
         "post_content" => result["post_content"],
         "image" => result["image"],
-        "user_id" => result["user_id"].to_i
+        "user_id" => result["user_id"].to_i,
+        "user_name" => result["user_name"],
+        "avatar" => result["avatar"]
       }
     end
   end
@@ -30,14 +34,18 @@ class Post
       <<-SQL
         SELECT *
         FROM posts
-        WHERE id = #{id};
+        JOIN users
+          ON posts.user_id = users.id
+        WHERE posts.id = #{id};
       SQL
     ).first
     return {
       "id" => results["id"].to_i,
       "post_content" => results["post_content"],
       "image" => results["image"],
-      "user_id" => results["user_id"].to_i
+      "user_id" => results["user_id"].to_i,
+      "user_name" => results["user_name"],
+      "avatar" => results["avatar"]
     }
   end
 
