@@ -2,3 +2,113 @@
   ↳ bin/rails:9
   [1m[35m (367.2ms)[0m  [1m[35mCREATE DATABASE "quitter_app_test" ENCODING = 'unicode'[0m
   ↳ bin/rails:9
+Started GET "/posts" for 127.0.0.1 at 2018-08-10 14:23:15 -0500
+Processing by PostsController#index as HTML
+Completed 200 OK in 159ms (Views: 1.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/posts" for 127.0.0.1 at 2018-08-10 14:26:05 -0500
+Processing by PostsController#index as */*
+  Parameters: {"post"=>{}}
+Completed 200 OK in 7ms (Views: 1.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/posts/1" for 127.0.0.1 at 2018-08-10 14:26:18 -0500
+Processing by PostsController#show as */*
+  Parameters: {"id"=>"1", "post"=>{}}
+Completed 200 OK in 2ms (Views: 0.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/posts" for 127.0.0.1 at 2018-08-10 14:26:37 -0500
+Processing by PostsController#create as */*
+  Parameters: {"post_content"=>"Miss Lincolna Beerslee", "image"=>"What", "user_id"=>"3", "post"=>{"post_content"=>"Miss Lincolna Beerslee", "image"=>"What", "user_id"=>"3"}}
+Completed 200 OK in 13ms (Views: 0.9ms | ActiveRecord: 0.0ms)
+
+
+Started PUT "/posts/6" for 127.0.0.1 at 2018-08-10 14:26:49 -0500
+Processing by PostsController#update as */*
+  Parameters: {"post_content"=>"Miss Lincolna Beerslee", "image"=>"Nah", "user_id"=>"3", "id"=>"6", "post"=>{"post_content"=>"Miss Lincolna Beerslee", "image"=>"Nah", "user_id"=>"3"}}
+Completed 200 OK in 69ms (Views: 0.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/posts" for 127.0.0.1 at 2018-08-10 14:26:53 -0500
+Processing by PostsController#index as */*
+  Parameters: {"post"=>{}}
+Completed 200 OK in 3ms (Views: 1.4ms | ActiveRecord: 0.0ms)
+
+
+Started DELETE "/posts/6" for 127.0.0.1 at 2018-08-10 14:27:00 -0500
+Processing by PostsController#delete as */*
+  Parameters: {"post_content"=>"Miss Lincolna Beerslee", "image"=>"Nah", "user_id"=>"3", "id"=>"6", "post"=>{"post_content"=>"Miss Lincolna Beerslee", "image"=>"Nah", "user_id"=>"3"}}
+Completed 200 OK in 12ms (Views: 0.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/posts" for 127.0.0.1 at 2018-08-10 14:27:03 -0500
+Processing by PostsController#index as */*
+  Parameters: {"post"=>{}}
+Completed 200 OK in 2ms (Views: 0.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/posts" for 127.0.0.1 at 2018-08-10 14:44:33 -0500
+Processing by PostsController#index as */*
+  Parameters: {"post"=>{}}
+Completed 200 OK in 8ms (Views: 2.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/posts/1" for 127.0.0.1 at 2018-08-10 14:45:37 -0500
+Processing by PostsController#show as */*
+  Parameters: {"id"=>"1", "post"=>{}}
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.0ms)
+
+
+  
+PG::SyntaxError (ERROR:  syntax error at or near "WHERE"
+LINE 5:         WHERE id = 1;
+                ^
+):
+  
+app/models/post.rb:33:in `exec'
+app/models/post.rb:33:in `find'
+app/controllers/posts_controller.rb:11:in `show'
+Started GET "/posts/1" for 127.0.0.1 at 2018-08-10 14:45:59 -0500
+Processing by PostsController#show as */*
+  Parameters: {"id"=>"1", "post"=>{}}
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms)
+
+
+  
+PG::SyntaxError (ERROR:  syntax error at or near "WHERE"
+LINE 5:         WHERE posts.id = 1;
+                ^
+):
+  
+app/models/post.rb:33:in `exec'
+app/models/post.rb:33:in `find'
+app/controllers/posts_controller.rb:11:in `show'
+Started GET "/posts" for 127.0.0.1 at 2018-08-10 14:46:09 -0500
+Processing by PostsController#index as */*
+  Parameters: {"post"=>{}}
+Completed 200 OK in 6ms (Views: 0.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/posts/1" for 127.0.0.1 at 2018-08-10 14:46:15 -0500
+Processing by PostsController#show as */*
+  Parameters: {"id"=>"1", "post"=>{}}
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms)
+
+
+  
+PG::SyntaxError (ERROR:  syntax error at or near "WHERE"
+LINE 5:         WHERE posts.id = 1;
+                ^
+):
+  
+app/models/post.rb:33:in `exec'
+app/models/post.rb:33:in `find'
+app/controllers/posts_controller.rb:11:in `show'
+Started GET "/posts/1" for 127.0.0.1 at 2018-08-10 14:46:26 -0500
+Processing by PostsController#show as */*
+  Parameters: {"id"=>"1", "post"=>{}}
+Completed 200 OK in 7ms (Views: 0.6ms | ActiveRecord: 0.0ms)
+
+
