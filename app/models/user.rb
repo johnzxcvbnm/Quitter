@@ -1,5 +1,5 @@
 class User
-  DB = PG.connect({ :host => "localhost", :port => 5432, dbname: => 'quitter_app_development'})
+  DB = PG.connect({ :host => "localhost", :port => 5432, :dbname => 'quitter_app_development'})
 
   def self.all
     results = DB.exec("SELECT * FROM users;")
