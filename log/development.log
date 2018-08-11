@@ -522,3 +522,62 @@ Processing by UsersController#index as */*
 Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.0ms)
 
 
+Started GET "/users" for 127.0.0.1 at 2018-08-11 14:20:12 -0500
+Processing by UsersController#index as HTML
+Completed 200 OK in 135ms (Views: 2.9ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2018-08-11 14:26:46 -0500
+Processing by UsersController#create as HTML
+  Parameters: {"user_name"=>"asdf", "password"=>"[FILTERED]", "avatar"=>"asdf", "user"=>{"user_name"=>"asdf", "password"=>"[FILTERED]", "avatar"=>"asdf"}}
+Completed 200 OK in 33ms (Views: 3.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2018-08-11 14:37:08 -0500
+Processing by UsersController#create as HTML
+  Parameters: {"user_name"=>"lolol", "password"=>"[FILTERED]", "avatar"=>"asdf", "user"=>{"user_name"=>"lolol", "password"=>"[FILTERED]", "avatar"=>"asdf"}}
+Completed 200 OK in 3ms (Views: 0.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2018-08-11 14:44:49 -0500
+Processing by UsersController#create as HTML
+  Parameters: {"user_name"=>"JohnZ", "password"=>"[FILTERED]", "avatar"=>"asdf", "user"=>{"user_name"=>"JohnZ", "password"=>"[FILTERED]", "avatar"=>"asdf"}}
+Completed 200 OK in 10ms (Views: 2.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users" for 127.0.0.1 at 2018-08-11 14:48:58 -0500
+Processing by UsersController#create as HTML
+  Parameters: {"user_name"=>"abc", "password"=>"[FILTERED]", "avatar"=>"asdf", "user"=>{"user_name"=>"abc", "password"=>"[FILTERED]", "avatar"=>"asdf"}}
+Completed 200 OK in 4ms (Views: 0.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2018-08-11 15:01:08 -0500
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"1"}
+Completed 200 OK in 8ms (Views: 2.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2018-08-11 15:01:50 -0500
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"1"}
+Completed 200 OK in 3ms (Views: 0.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2018-08-11 15:02:31 -0500
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"1"}
+Completed 200 OK in 2ms (Views: 0.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2018-08-11 15:03:48 -0500
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"1"}
+Completed 200 OK in 3ms (Views: 0.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/1" for 127.0.0.1 at 2018-08-11 15:19:22 -0500
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"1"}
+Completed 200 OK in 8ms (Views: 2.5ms | ActiveRecord: 0.0ms)
+
+
