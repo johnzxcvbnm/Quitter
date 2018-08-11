@@ -45,9 +45,8 @@ class App extends React.Component {
   //Function creates a new user in the database
   //Function makes a POST request to the server
   //If successful it logs the returned user into the state creating a session
+  //Logged in users are then brought back to the main page (postList)
   createUser(new_user){
-    // console.log("Creating New User");
-    // console.log(new_user);
     fetch("/users", {
       body: JSON.stringify(new_user),
       method: "POST",
@@ -66,15 +65,25 @@ class App extends React.Component {
     .catch(error => console.log(error));
   }
 
+  //Function creates a session by saving the user information in the current state
+  //Function changes the password to 'Nice Try' for protection before setting the state
+  //this.state.loggedUser is used for user functionality (only logged in users can post, for example)
   setUser(new_user){
-    new_user["password"] = "Nice Try";
+    if(new_user != null){
+      new_user["password"] = "Nice Try";
+    }
+
     this.setState({loggedUser: new_user});
   }
 
+  //Function destroys current sesison
+  //Function sets the currently logged in user to null, thus destorying the session
   logOut(){
     this.setUser(null);
   }
 
+  //Function calls the server to login user
+  //Currently the server automatically logs the user in as the first user ID until further updated
   loginUser(new_user){
     console.log("Logging In User");
     console.log(new_user);
@@ -131,6 +140,7 @@ class App extends React.Component {
   }
 }
 
+//Send to index.html
 ReactDOM.render(
   <App />,
   document.querySelector("main")

@@ -1,3 +1,5 @@
+//UserList shows a complete list of users
+//Currently is unused outside of render tests
 class UserList extends React.Component {
   render() {
     return (
