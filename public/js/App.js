@@ -7,10 +7,7 @@ class App extends React.Component {
       page: {
         userLogin: false,
         userRegister: false,
-        postList: false,
-        testUserForm: false,
-        testUserList: false,
-        testUserShow: true
+        postList: true
 
       }, //End of this.state.page
       loggedUser: {}
@@ -43,20 +40,22 @@ class App extends React.Component {
   render() {
     return (
       <div className="container">
+      {/* A Nav Bar that will be stuck to the top of the page */}
         <NavBar changePage={this.changePage}/>
+        {/* Conditionals that display the rest of the website's content */}
         {
-          this.state.page.testUserForm ?
+          this.state.page.postList ?
+            <PostList />
+          : ''
+        }
+        {
+          this.state.page.userRegister ?
             <UserForm />
           : ''
         }
         {
-          this.state.page.testUserList ?
-            <UserList />
-          : ''
-        }
-        {
-          this.state.page.testUserShow ?
-            <UserShow />
+          this.state.page.userLogin ?
+            <UserForm />
           : ''
         }
       </div>
