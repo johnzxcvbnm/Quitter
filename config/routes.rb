@@ -6,6 +6,11 @@ Rails.application.routes.draw do
   delete '/users/:id', to: 'users#delete'
   put '/users/:id', to: 'users#update'
 
+  get '/posts', to: 'posts#index'
+  get '/posts/:id', to: 'posts#show'
+  post '/posts', to: 'posts#create'
+  delete '/posts/:id', to: 'posts#delete'
+  put '/posts/:id', to: 'posts#update'
 
   get '/comments', to: 'comments#index'
   post '/comments', to: 'comments#create'
