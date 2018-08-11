@@ -10,11 +10,14 @@ class App extends React.Component {
         postList: true
 
       }, //End of this.state.page
-      loggedUser: {}
+      //The current logged in user, if there is one
+      loggedUser: null
     } //End of this.state
     //Function Bindings
     this.changePage = this.changePage.bind(this);
     this.createUser = this.createUser.bind(this);
+    this.setUser = this.setUser.bind(this);
+    this.logOut = this.logOut.bind(this);
   }
 
   //Function used to load things on page load
@@ -38,9 +41,32 @@ class App extends React.Component {
   }
 
   createUser(new_user){
-    console.log("Creating New User");
-    console.log(new_user);
+    // console.log("Creating New User");
+    // console.log(new_user);
+    fetch("/users", {
+      body: JSON.stringify(new_user),
+      method: "POST",
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(createdUser => {
+      return createdUser.json()
+    })
+    .then(jsonedUser => {
+      this.setUser(jsonedUser);
+      this.changePage("postList");
+    })
+    .catch(error => console.log(error));
+  }
 
+  setUser(new_user){
+    this.setState({loggedUser: new_user});
+  }
+
+  logOut(){
+    this.setUser(null);
   }
 
   //Render to the browser
@@ -48,7 +74,10 @@ class App extends React.Component {
     return (
       <div className="container">
       {/* A Nav Bar that will be stuck to the top of the page */}
-        <NavBar changePage={this.changePage}/>
+        <NavBar
+          changePage={this.changePage}
+          loggedUser={this.state.loggedUser}
+          logOut={this.logOut}/>
         {/* Conditionals that display the rest of the website's content */}
         {/*Post Listing Section (Default Main Page)*/}
         {

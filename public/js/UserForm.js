@@ -17,20 +17,14 @@ class UserForm extends React.Component {
     if(!(this.refs.avatar)){
       this.refs["avatar"] = { value: "Test" };
     }
+
     const new_user = {
       user_name: this.refs.user_name.value,
       password: this.refs.password.value,
       avatar: this.refs.avatar.value
     }
-    // if(this.refs.avatar){
-    //   new_user["avatar"] = this.refs.avatar.value;
-    // } else {
-    //   this.refs["avatar"] = {value: "Test"};
-    //   new_user["avatar"] = this.refs.avatar.value;
-    // }
-    // console.log(new_user);
+    
     this.props.functionExecute(new_user);
-
   }
 
   render() {
