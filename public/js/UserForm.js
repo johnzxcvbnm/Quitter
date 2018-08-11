@@ -4,9 +4,9 @@ class UserForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   componentDidMount() {
-    if(this.props.user){
+    if(this.props.loggedUser){
       console.log("Logged In User:");
-      console.log(this.props.user);
+      console.log(this.props.loggedUser);
     }
   }
 
@@ -23,14 +23,14 @@ class UserForm extends React.Component {
       password: this.refs.password.value,
       avatar: this.refs.avatar.value
     }
-    
+
     this.props.functionExecute(new_user);
   }
 
   render() {
     return (
       <div className="field">
-        <h1>This is the UserForm Page</h1>
+        <h1>{this.props.title}</h1>
         <form onSubmit={this.handleSubmit}>
           <label className="label" for="user_name">User Name</label>
           <div className="cotrol">

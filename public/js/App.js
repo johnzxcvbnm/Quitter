@@ -7,6 +7,7 @@ class App extends React.Component {
       page: {
         userLogin: false,
         userRegister: false,
+        userShow: false,
         postList: true
 
       }, //End of this.state.page
@@ -18,6 +19,7 @@ class App extends React.Component {
     this.createUser = this.createUser.bind(this);
     this.setUser = this.setUser.bind(this);
     this.logOut = this.logOut.bind(this);
+    this.loginUser = this.loginUser.bind(this);
   }
 
   //Function used to load things on page load
@@ -69,6 +71,17 @@ class App extends React.Component {
     this.setUser(null);
   }
 
+  loginUser(new_user){
+    console.log("Logging In User");
+    console.log(new_user);
+    fetch("/users/1")
+      .then(response => response.json())
+        .then(logged_user => {
+          this.setUser(logged_user);
+          this.changePage("postList");
+        }).catch(error => console.log(error));
+  }
+
   //Render to the browser
   render() {
     return (
@@ -90,14 +103,23 @@ class App extends React.Component {
           this.state.page.userRegister ?
             <UserForm
               login={false}
-              functionExecute={this.createUser}/>
+              functionExecute={this.createUser}
+              title="Register User"/>
           : ''
         }
         {/*User Login Section*/}
         {
           this.state.page.userLogin ?
             <UserForm
-              login={true}/>
+              login={true}
+              functionExecute={this.loginUser}
+              title="User Login"/>
+          : ''
+        }
+        {/* User Show Page */}
+        {
+          this.state.page.userShow ?
+            <UserShow />
           : ''
         }
       </div>
