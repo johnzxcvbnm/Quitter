@@ -14,6 +14,7 @@ class App extends React.Component {
     } //End of this.state
     //Function Bindings
     this.changePage = this.changePage.bind(this);
+    this.createUser = this.createUser.bind(this);
   }
 
   //Function used to load things on page load
@@ -36,6 +37,12 @@ class App extends React.Component {
     this.setState({page: toUpdate })
   }
 
+  createUser(new_user){
+    console.log("Creating New User");
+    console.log(new_user);
+
+  }
+
   //Render to the browser
   render() {
     return (
@@ -43,26 +50,31 @@ class App extends React.Component {
       {/* A Nav Bar that will be stuck to the top of the page */}
         <NavBar changePage={this.changePage}/>
         {/* Conditionals that display the rest of the website's content */}
+        {/*Post Listing Section (Default Main Page)*/}
         {
           this.state.page.postList ?
             <PostList />
           : ''
         }
+        {/*User Registration Section*/}
         {
           this.state.page.userRegister ?
-            <UserForm />
+            <UserForm
+              login={false}
+              functionExecute={this.createUser}/>
           : ''
         }
+        {/*User Login Section*/}
         {
           this.state.page.userLogin ?
-            <UserForm />
+            <UserForm
+              login={true}/>
           : ''
         }
       </div>
     )
   }
 }
-
 
 ReactDOM.render(
   <App />,
