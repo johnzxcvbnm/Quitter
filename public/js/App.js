@@ -20,7 +20,7 @@ class App extends React.Component {
     this.setUser = this.setUser.bind(this);
     this.logOut = this.logOut.bind(this);
     this.loginUser = this.loginUser.bind(this);
-  }
+  }//End of Constructor
 
   //Function used to load things on page load
   // Currently used for testing
@@ -42,6 +42,9 @@ class App extends React.Component {
     this.setState({page: toUpdate })
   }
 
+  //Function creates a new user in the database
+  //Function makes a POST request to the server
+  //If successful it logs the returned user into the state creating a session
   createUser(new_user){
     // console.log("Creating New User");
     // console.log(new_user);
@@ -64,6 +67,7 @@ class App extends React.Component {
   }
 
   setUser(new_user){
+    new_user["password"] = "Nice Try";
     this.setState({loggedUser: new_user});
   }
 
