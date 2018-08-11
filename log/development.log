@@ -522,3 +522,63 @@ Processing by UsersController#index as */*
 Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.0ms)
 
 
+Started GET "/comments/" for 127.0.0.1 at 2018-08-11 10:39:26 -0400
+Processing by CommentsController#index as */*
+  Parameters: {"comment"=>{}}
+Completed 500 Internal Server Error in 31ms (ActiveRecord: 0.0ms)
+
+
+  
+PG::UndefinedTable (ERROR:  relation "comments" does not exist
+LINE 2:         comments
+                ^
+):
+  
+app/models/comment.rb:11:in `exec'
+app/models/comment.rb:11:in `all'
+app/controllers/comments_controller.rb:7:in `index'
+Started GET "/comments/" for 127.0.0.1 at 2018-08-11 10:40:51 -0400
+Processing by CommentsController#index as */*
+  Parameters: {"comment"=>{}}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms)
+
+
+  
+PG::UndefinedTable (ERROR:  relation "users" does not exist
+LINE 4:         users
+                ^
+):
+  
+app/models/comment.rb:11:in `exec'
+app/models/comment.rb:11:in `all'
+app/controllers/comments_controller.rb:7:in `index'
+Started GET "/comments/" for 127.0.0.1 at 2018-08-11 10:41:39 -0400
+Processing by CommentsController#index as */*
+  Parameters: {"comment"=>{}}
+Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/comments/" for 127.0.0.1 at 2018-08-11 10:42:56 -0400
+Processing by CommentsController#create as */*
+  Parameters: {"comment_content"=>"Totally Tubular Dude", "image"=>"https://robohash.org/893.png?size=100x100&set=set4", "user_id"=>1, "post_id"=>1, "comment"=>{"comment_content"=>"Totally Tubular Dude", "image"=>"https://robohash.org/893.png?size=100x100&set=set4", "user_id"=>1, "post_id"=>1}}
+Completed 200 OK in 11ms (Views: 0.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/comments/" for 127.0.0.1 at 2018-08-11 10:42:59 -0400
+Processing by CommentsController#index as */*
+  Parameters: {"comment"=>{}}
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/comments/" for 127.0.0.1 at 2018-08-11 10:43:16 -0400
+Processing by CommentsController#create as */*
+  Parameters: {"comment_content"=>"Totally Tubular Dude", "image"=>"https://robohash.org/893.png?size=100x100&set=set4", "user_id"=>1, "post_id"=>1, "comment"=>{"comment_content"=>"Totally Tubular Dude", "image"=>"https://robohash.org/893.png?size=100x100&set=set4", "user_id"=>1, "post_id"=>1}}
+Completed 200 OK in 6ms (Views: 0.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/comments/" for 127.0.0.1 at 2018-08-11 10:43:19 -0400
+Processing by CommentsController#index as */*
+  Parameters: {"comment"=>{}}
+Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms)
+
+
