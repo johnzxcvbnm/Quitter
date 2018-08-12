@@ -4,15 +4,19 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      //Which page is the user currently viewing
       page: {
         userLogin: false,
         userRegister: false,
         userShow: false,
+        userEdit: false,
         postList: true
 
       }, //End of this.state.page
       //The current logged in user, if there is one
-      loggedUser: null
+      loggedUser: null,
+      //Used for user show pages
+      selectedUser: null
     } //End of this.state
     //Function Bindings
     this.changePage = this.changePage.bind(this);
@@ -20,6 +24,8 @@ class App extends React.Component {
     this.setUser = this.setUser.bind(this);
     this.logOut = this.logOut.bind(this);
     this.loginUser = this.loginUser.bind(this);
+    this.changeSelectedUser = this.changeSelectedUser.bind(this);
+    this.editUser = this.editUser.bind(this);
   }//End of Constructor
 
   //Function used to load things on page load
@@ -72,7 +78,6 @@ class App extends React.Component {
     if(new_user != null){
       new_user["password"] = "Nice Try";
     }
-
     this.setState({loggedUser: new_user});
   }
 
@@ -85,14 +90,44 @@ class App extends React.Component {
   //Function calls the server to login user
   //Currently the server automatically logs the user in as the first user ID until further updated
   loginUser(new_user){
-    console.log("Logging In User");
-    console.log(new_user);
+    // console.log("Logging In User");
+    // console.log(new_user);
     fetch("/users/1")
       .then(response => response.json())
         .then(logged_user => {
           this.setUser(logged_user);
           this.changePage("postList");
         }).catch(error => console.log(error));
+  }
+
+  //Function changes the selected user.
+  //Selected User is used to dislay user show pages
+  changeSelectedUser(new_user){
+    this.setState({selectedUser: new_user});
+  }
+
+  //Function edits an existing user
+  //Function calls the back end with the information from old_user and updates the user
+  //The loggedUser is then updated and the user is redirected back to the main page (postList)
+  editUser(old_user){
+    // console.log("Editing User");
+    // console.log(old_user);
+    fetch("/users/" + old_user.id, {
+      body: JSON.stringify(old_user),
+      method: "PUT",
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(updatedUser => {
+      return updatedUser.json()
+    })
+    .then(jsonedUser => {
+      this.setUser(jsonedUser);
+      this.changePage("postList");
+    })
+    .catch(error => console.log(error))
   }
 
   //Render to the browser
@@ -103,7 +138,8 @@ class App extends React.Component {
         <NavBar
           changePage={this.changePage}
           loggedUser={this.state.loggedUser}
-          logOut={this.logOut}/>
+          logOut={this.logOut}
+          changeSelectedUser={this.changeSelectedUser}/>
         {/* Conditionals that display the rest of the website's content */}
         {/*Post Listing Section (Default Main Page)*/}
         {
@@ -115,7 +151,6 @@ class App extends React.Component {
         {
           this.state.page.userRegister ?
             <UserForm
-              login={false}
               functionExecute={this.createUser}
               title="Register User"/>
           : ''
@@ -129,10 +164,22 @@ class App extends React.Component {
               title="User Login"/>
           : ''
         }
+        {/* User Edit Page */}
+        {
+          this.state.page.userEdit ?
+            <UserForm
+            functionExecute={this.editUser}
+            title="Edit User"
+            loggedUser={this.state.loggedUser}/>
+          : ''
+        }
         {/* User Show Page */}
         {
           this.state.page.userShow ?
-            <UserShow />
+            <UserShow
+              loggedUser={this.state.loggedUser}
+              selectedUser={this.state.selectedUser}
+              changePage={this.changePage}/>
           : ''
         }
       </div>

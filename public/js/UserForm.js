@@ -1,4 +1,4 @@
-//UserForm is used to Register new users, Login existing users, and (soon to be) Edit existing users
+//UserForm is used to Register new users, Login existing users, and Edit existing users
 class UserForm extends React.Component {
   constructor(props) {
     super(props);
@@ -8,8 +8,10 @@ class UserForm extends React.Component {
   //If there is a user, prefill the input boxes
   componentDidMount() {
     if(this.props.loggedUser){
-      console.log("Logged In User:");
-      console.log(this.props.loggedUser);
+      // console.log("Logged In User:");
+      // console.log(this.props.loggedUser);
+      this.refs.user_name.value = this.props.loggedUser.user_name;
+      this.refs.avatar.value = this.props.loggedUser.avatar;
     }
   }
 
@@ -32,6 +34,11 @@ class UserForm extends React.Component {
       user_name: this.refs.user_name.value,
       password: this.refs.password.value,
       avatar: this.refs.avatar.value
+    }
+
+    //If the user is editing their user information, add the user ID to the new_user
+    if(this.props.loggedUser){
+      new_user["id"] = this.props.loggedUser.id;
     }
 
     //Call the ParentClass function with the newly created user
