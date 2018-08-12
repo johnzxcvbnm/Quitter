@@ -10,7 +10,10 @@ class Post
   def self.all
     results = DB.exec(
       <<-SQL
-        SELECT *
+        SELECT
+          posts.*,
+          users.avatar,
+          users.user_name
         FROM posts
         JOIN users
           ON posts.user_id = users.id
