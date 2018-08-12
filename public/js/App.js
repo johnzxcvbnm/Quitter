@@ -32,6 +32,7 @@ class App extends React.Component {
     this.changeSelectedUser = this.changeSelectedUser.bind(this);
     this.editUser = this.editUser.bind(this);
     this.loadPosts = this.loadPosts.bind(this);
+    this.createPost = this.createPost.bind(this);
   }//End of Constructor
 
   //Function used to load things on page load
@@ -146,6 +147,28 @@ class App extends React.Component {
         }).catch(error => console.log(error));
   }
 
+  createPost(new_post){
+    // console.log(new_post);
+    fetch("/posts", {
+      body: JSON.stringify(new_post),
+      method: "POST",
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(createdPost => {
+      return createdPost.json()
+    })
+    .then(jsonedPost => {
+      jsonedPost["user_name"] = this.state.loggedUser.user_name;
+      jsonedPost["avatar"] = this.state.loggedUser.avatar;
+      console.log([jsonedPost, ...this.state.posts]);
+      this.setState({posts: [jsonedPost, ...this.state.posts]});
+      this.changePage("postList");
+    })
+  }
+
   //Render to the browser
   render() {
     return (
@@ -172,7 +195,8 @@ class App extends React.Component {
           this.state.page.postList && this.state.loggedUser ?
             <span>
               <UserSplash
-                loggedUser={this.state.loggedUser}/>
+                loggedUser={this.state.loggedUser}
+                changePage={this.changePage}/>
               <PostList
                 posts={this.state.posts}
                 loggedUser={this.state.loggedUser}
@@ -213,6 +237,15 @@ class App extends React.Component {
               loggedUser={this.state.loggedUser}
               selectedUser={this.state.selectedUser}
               changePage={this.changePage}/>
+          : ''
+        }
+        {/* Create Post Section */}
+        {
+          this.state.page.postForm ?
+            <PostForm
+              changePage={this.changePage}
+              loggedUser={this.state.loggedUser}
+              functionExecute={this.createPost}/>
           : ''
         }
       </div>
