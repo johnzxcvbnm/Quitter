@@ -149,7 +149,7 @@ class App extends React.Component {
               id: 0,
               post_content: "No one has posted anything yet!  Login and claim your birth right of creating the first post!",
               image: "",
-              user_id: 0,
+              user_id: -1,
               user_name: "Quitter Dev",
               avatar: "https://d1ielco78gv5pf.cloudfront.net/assets/clear-495a83e08fc8e5d7569efe6339a1228ee08292fa1f2bee8e0be6532990cb3852.gif"
             })
@@ -175,10 +175,15 @@ class App extends React.Component {
       return createdPost.json()
     })
     .then(jsonedPost => {
+      const copy_array = this.state.posts;
+      if(copy_array[0]["user_id"] == -1){
+        copy_array.pop();
+      }
       jsonedPost["user_name"] = this.state.loggedUser.user_name;
       jsonedPost["avatar"] = this.state.loggedUser.avatar;
       console.log([jsonedPost, ...this.state.posts]);
-      this.setState({posts: [jsonedPost, ...this.state.posts]});
+      copy_array.unshift(jsonedPost);
+      this.setState({posts: copy_array});
       this.changePage("postList");
     })
   }

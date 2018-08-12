@@ -45,17 +45,14 @@ class User
         <<-SQL
           SELECT *
           FROM users
-          JOIN posts
-          ON users.id = posts.user_id
-          WHERE users.id =#{id};
+          WHERE id =#{id};
         SQL
     )
     return {
         "id" => results.first["id"].to_i,
         "user_name" => results.first["user_name"],
         "password" => results.first["password"],
-        "avatar" => results.first["avatar"],
-        "post_id" => results.first["post_id"]
+        "avatar" => results.first["avatar"]
     }
   end
 
