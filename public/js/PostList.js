@@ -14,15 +14,16 @@ class PostList extends React.Component {
                 <div className="avatar"><img src={post.avatar}/></div>
               </div>
               <h3><b>Posted By: </b>{post.user_name}</h3>
-              <h3><b>Avatar: </b></h3>
-              <h3><b>Content: </b>{post.post_content}</h3>
-              <h3><b>Post Image: </b></h3>
               {/* If the user created this post, then allow them to edit it */}
               {
                 post.user_id == this.props.loggedUser.id ?
                   <span>
                     <button className="button is-warning">Edit Post</button>
-                    <button className="button is-danger">Delete Post</button>
+                    <button
+                      className="button is-danger"
+                      onClick={() => this.props.deletePost(post, index)}>
+                        Delete Post
+                    </button>
                   </span>
                 : ''
               }

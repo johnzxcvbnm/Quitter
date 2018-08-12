@@ -33,6 +33,7 @@ class App extends React.Component {
     this.editUser = this.editUser.bind(this);
     this.loadPosts = this.loadPosts.bind(this);
     this.createPost = this.createPost.bind(this);
+    this.deletePost = this.deletePost.bind(this);
   }//End of Constructor
 
   //Function used to load things on page load
@@ -144,21 +145,25 @@ class App extends React.Component {
         .then(all_posts => {
           // console.log(all_posts);
           if(all_posts[0] == null){
-            const default_post = [];
-            default_post.push({
-              id: 0,
-              post_content: "No one has posted anything yet!  Login and claim your birth right of creating the first post!",
-              image: "",
-              user_id: -1,
-              user_name: "Quitter Dev",
-              avatar: "https://d1ielco78gv5pf.cloudfront.net/assets/clear-495a83e08fc8e5d7569efe6339a1228ee08292fa1f2bee8e0be6532990cb3852.gif"
-            })
-            console.log(default_post);
-            this.setState({posts: default_post})
+            this.loadDefaultPost();
           } else {
             this.setState({posts: all_posts})
           }
         }).catch(error => console.log(error));
+  }
+
+  loadDefaultPost(){
+    const default_post = [];
+    default_post.push({
+      id: 0,
+      post_content: "No one has posted anything yet!  Login and claim your birth right of creating the first post!",
+      image: "",
+      user_id: -1,
+      user_name: "Quitter Dev",
+      avatar: "https://d1ielco78gv5pf.cloudfront.net/assets/clear-495a83e08fc8e5d7569efe6339a1228ee08292fa1f2bee8e0be6532990cb3852.gif"
+    })
+    // console.log(default_post);
+    this.setState({posts: default_post});
   }
 
   createPost(new_post){
@@ -188,7 +193,24 @@ class App extends React.Component {
     })
   }
 
-
+  deletePost(old_post, index){
+    console.log("DELETING");
+    console.log(old_post);
+    fetch("/posts/" + old_post.id, {
+      method: "DELETE"
+    })
+    .then(data => {
+      this.setState({
+        posts: [
+          ...this.state.posts.slice(0, index),
+          ...this.state.posts.slice(index + 1)
+        ]
+      })
+      if(this.state.posts.length == 0){
+        this.loadDefaultPost();
+      }
+    }).catch(error => console.log(error))
+  }
 
   //Render to the browser
   render() {
@@ -221,7 +243,9 @@ class App extends React.Component {
               <PostList
                 posts={this.state.posts}
                 loggedUser={this.state.loggedUser}
-                changePage={this.changePage}/>
+                changePage={this.changePage}
+                deletePost={this.deletePost}
+                />
             </span>
           : ''
         }
