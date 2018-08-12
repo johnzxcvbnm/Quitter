@@ -142,8 +142,22 @@ class App extends React.Component {
     fetch("/posts")
       .then(response => response.json())
         .then(all_posts => {
-          console.log(all_posts);
-          this.setState({posts: all_posts})
+          // console.log(all_posts);
+          if(all_posts[0] == null){
+            const default_post = [];
+            default_post.push({
+              id: 0,
+              post_content: "No one has posted anything yet!  Login and claim your birth right of creating the first post!",
+              image: "",
+              user_id: 0,
+              user_name: "Quitter Dev",
+              avatar: "https://d1ielco78gv5pf.cloudfront.net/assets/clear-495a83e08fc8e5d7569efe6339a1228ee08292fa1f2bee8e0be6532990cb3852.gif"
+            })
+            console.log(default_post);
+            this.setState({posts: default_post})
+          } else {
+            this.setState({posts: all_posts})
+          }
         }).catch(error => console.log(error));
   }
 
@@ -169,7 +183,7 @@ class App extends React.Component {
     })
   }
 
-  
+
 
   //Render to the browser
   render() {
