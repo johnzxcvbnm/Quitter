@@ -14,6 +14,7 @@ body {
 }
 main {
   background-color: snow;
+  width: 100%;
 }
 div {
   color: #05386B;
@@ -24,6 +25,7 @@ div {
   flex-direction: column;
   align-items: center;
   background-color: #8EE4AF;
+  width: 100%;
 }
 .columns {
   color: #05386B;
@@ -62,15 +64,51 @@ img {
   padding: 20px;
   border-radius: 20px;
   border: 2px solid #EDF5E1;
+  width: 80%;
+  margin: 20px auto;
+  text-align: center;
+}
+
+span {
+  width: 100%;
 }
 
 .post {
   background-color: #05386B;
+  width: 100%;
   padding: 20px;
   border-radius: 20px;
   border: 2px solid #EDF5E1;
+  width: 80%;
+  margin: 0 auto;O0
+}
+
+.content {
+  width: 80%;
+  text-align: center;
+  box-shadow: 0 0 10px #05386B;
+  background-color: #EDF5E1;
+}
+
+.avatar {
+  margin-left: 20px;
 }
 
 .post div {
+  margin: 0 auto;
   border-radius: 10px;
+}
+
+.one_post {
+  padding-top: 10px;
+}
+
+
+/* .user {
+  display: flex;
+  flex-direction: column;
+} */
+.avatar img {
+  background-color: #EDF5E1;
+  border-radius: 100px;
 }
