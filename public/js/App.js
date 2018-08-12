@@ -161,10 +161,16 @@ class App extends React.Component {
             <span>
               <UserSplash
                 loggedUser={this.state.loggedUser}/>
-              <PostList posts={this.state.posts}/>
+              <PostList
+                posts={this.state.posts}
+                loggedUser={this.state.loggedUser}/>
             </span>
           :
-            <PostList posts={this.state.posts}/>
+            <span>
+              <PostList
+                posts={this.state.posts}
+                loggedUser={ {id: 0} }/>
+            </span>
         }
         {/*User Registration Section*/}
         {
