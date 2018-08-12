@@ -1,5 +1,6 @@
 /log/*
 /tmp/*
 /tmp/cache/bootsnap-load-path-cache
+/log/development.log
 
 ####
