@@ -16,7 +16,9 @@ class App extends React.Component {
       //The current logged in user, if there is one
       loggedUser: null,
       //Used for user show pages
-      selectedUser: null
+      selectedUser: null,
+      //A list of posts
+      posts: []
     } //End of this.state
     //Function Bindings
     this.changePage = this.changePage.bind(this);
@@ -26,12 +28,14 @@ class App extends React.Component {
     this.loginUser = this.loginUser.bind(this);
     this.changeSelectedUser = this.changeSelectedUser.bind(this);
     this.editUser = this.editUser.bind(this);
+    this.loadPosts = this.loadPosts.bind(this);
   }//End of Constructor
 
   //Function used to load things on page load
-  // Currently used for testing
+  //Function loads a list of posts on page load
   componentDidMount() {
     // this.changePage("pageUserRegister");
+    this.loadPosts();
   }
 
   //Function used to change what section is being displayed (newPage is the new section to be displayed)
@@ -130,6 +134,15 @@ class App extends React.Component {
     .catch(error => console.log(error))
   }
 
+  loadPosts() {
+    fetch("/posts")
+      .then(response => response.json())
+        .then(all_posts => {
+          console.log(all_posts);
+          this.setState({posts: all_posts})
+        }).catch(error => console.log(error));
+  }
+
   //Render to the browser
   render() {
     return (
@@ -141,17 +154,17 @@ class App extends React.Component {
           logOut={this.logOut}
           changeSelectedUser={this.changeSelectedUser}/>
         {/* Conditionals that display the rest of the website's content */}
-        {
-          this.state.loggedUser ?
-            <UserSplash
-              loggedUser={this.state.loggedUser}/>
-          : ''
-        }
+        {/* If the user is logged in, display their information at the top of the page */}
         {/*Post Listing Section (Default Main Page)*/}
         {
-          this.state.page.postList ?
-            <PostList />
-          : ''
+          this.state.loggedUser ?
+            <span>
+              <UserSplash
+                loggedUser={this.state.loggedUser}/>
+              <PostList posts={this.state.posts}/>
+            </span>
+          :
+            <PostList posts={this.state.posts}/>
         }
         {/*User Registration Section*/}
         {
