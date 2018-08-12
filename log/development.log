@@ -523,6 +523,193 @@ Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.0ms)
 
 
 <<<<<<< HEAD
+Started GET "/users/" for 127.0.0.1 at 2018-08-10 16:42:17 -0400
+Processing by UsersController#index as */*
+  Parameters: {"user"=>{}}
+Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users" for 127.0.0.1 at 2018-08-10 16:53:18 -0400
+Processing by UsersController#index as HTML
+Completed 200 OK in 1ms (Views: 0.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/posts" for 127.0.0.1 at 2018-08-10 17:05:22 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/posts"):
+  
+actionpack (5.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.6.2) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.6.2) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.1) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.1) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.1) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.5) lib/rack/method_override.rb:22:in `call'
+rack (2.0.5) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.5) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.1) lib/rails/engine.rb:524:in `call'
+puma (3.12.0) lib/puma/configuration.rb:225:in `call'
+puma (3.12.0) lib/puma/server.rb:658:in `handle_request'
+puma (3.12.0) lib/puma/server.rb:472:in `process_client'
+puma (3.12.0) lib/puma/server.rb:332:in `block in run'
+puma (3.12.0) lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Started GET "/likes" for 127.0.0.1 at 2018-08-10 21:28:15 -0400
+Processing by LikesController#index as */*
+  Parameters: {"like"=>{}}
+Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/likes" for 127.0.0.1 at 2018-08-10 21:28:51 -0400
+Processing by LikesController#index as */*
+  Parameters: {"like"=>{}}
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Started GET "/likes" for 127.0.0.1 at 2018-08-10 21:29:16 -0400
+Processing by LikesController#index as */*
+  Parameters: {"like"=>{}}
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/likes" for 127.0.0.1 at 2018-08-10 21:29:17 -0400
+Processing by LikesController#index as */*
+  Parameters: {"like"=>{}}
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/likes" for 127.0.0.1 at 2018-08-10 21:29:18 -0400
+Processing by LikesController#index as */*
+  Parameters: {"like"=>{}}
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/likes" for 127.0.0.1 at 2018-08-10 21:29:18 -0400
+Processing by LikesController#index as */*
+  Parameters: {"like"=>{}}
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Started GET "/likes" for 127.0.0.1 at 2018-08-10 21:29:50 -0400
+Processing by LikesController#index as */*
+  Parameters: {"like"=>{}}
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/likes" for 127.0.0.1 at 2018-08-10 21:29:52 -0400
+Processing by LikesController#index as */*
+  Parameters: {"like"=>{}}
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Started GET "/likes" for 127.0.0.1 at 2018-08-10 21:33:01 -0400
+Processing by LikesController#index as */*
+  Parameters: {"like"=>{}}
+Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/likes" for 127.0.0.1 at 2018-08-10 21:33:10 -0400
+Processing by LikesController#index as */*
+  Parameters: {"like"=>{}}
+Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/likes" for 127.0.0.1 at 2018-08-10 21:39:41 -0400
+Processing by LikesController#create as */*
+  Parameters: {"user_id"=>7, "post_id"=>5, "like"=>{"user_id"=>7, "post_id"=>5}}
+Completed 200 OK in 7ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/likes/11" for 127.0.0.1 at 2018-08-10 21:39:47 -0400
+  
+ActionController::RoutingError (No route matches [POST] "/likes/11"):
+  
+actionpack (5.2.1) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.6.2) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.6.2) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.6.2) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.1) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.1) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.1) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.1) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.1) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.1) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.5) lib/rack/method_override.rb:22:in `call'
+rack (2.0.5) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.1) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.1) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.5) lib/rack/sendfile.rb:111:in `call'
+railties (5.2.1) lib/rails/engine.rb:524:in `call'
+puma (3.12.0) lib/puma/configuration.rb:225:in `call'
+puma (3.12.0) lib/puma/server.rb:658:in `handle_request'
+puma (3.12.0) lib/puma/server.rb:472:in `process_client'
+puma (3.12.0) lib/puma/server.rb:332:in `block in run'
+puma (3.12.0) lib/puma/thread_pool.rb:133:in `block in spawn_thread'
+Started GET "/likes/11" for 127.0.0.1 at 2018-08-10 21:39:53 -0400
+Processing by LikesController#show as */*
+  Parameters: {"id"=>"11", "like"=>{}}
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+Started PUT "/likes/11" for 127.0.0.1 at 2018-08-10 21:40:20 -0400
+Processing by LikesController#update as */*
+  Parameters: {"user_id"=>8, "post_id"=>6, "id"=>"11", "like"=>{"user_id"=>8, "post_id"=>6}}
+Completed 200 OK in 7ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/likes" for 127.0.0.1 at 2018-08-10 21:40:28 -0400
+Processing by LikesController#index as */*
+  Parameters: {"like"=>{}}
+Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms)
+
+
+Started DELETE "/likes/11" for 127.0.0.1 at 2018-08-10 21:40:45 -0400
+Processing by LikesController#delete as */*
+  Parameters: {"user_id"=>8, "post_id"=>6, "id"=>"11", "like"=>{"user_id"=>8, "post_id"=>6}}
+Completed 200 OK in 6ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/likes/" for 127.0.0.1 at 2018-08-10 21:41:06 -0400
+Processing by LikesController#index as */*
+  Parameters: {"like"=>{}}
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms)
+
+
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Started GET "/likes/" for 127.0.0.1 at 2018-08-10 21:41:15 -0400
+Processing by LikesController#index as */*
+  Parameters: {"like"=>{}}
+Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms)
+=======
+<<<<<<< HEAD
 Started GET "/users" for 127.0.0.1 at 2018-08-11 14:20:12 -0500
 Processing by UsersController#index as HTML
 Completed 200 OK in 135ms (Views: 2.9ms | ActiveRecord: 0.0ms)
@@ -640,5 +827,6 @@ Processing by CommentsController#index as */*
   Parameters: {"comment"=>{}}
 Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms)
 >>>>>>> 2a9ca7807de44c4c17b8dd6875c17790fb642827
+>>>>>>> 5e1dcccdf2ff4e00edb128ce24bc8fa652f4463b
 
 
