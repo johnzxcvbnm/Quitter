@@ -16,7 +16,7 @@ main {
   background-color: snow;
   width: 100%;
 }
-div {
+.one_post {
   color: #05386B;
   background-color: #8EE4AF;
 }
@@ -27,20 +27,26 @@ div {
   background-color: #8EE4AF;
   width: 100%;
 }
-.columns {
+
+.nav {
   color: #05386B;
-  width: 100%;
+  width: 95%;
   text-align: center;
   background-color: #8EE4AF;
   font-weight: 1000;
   font-size: 20px;
 }
-.columns div {
+.nav div {
   background-color: #8EE4AF;
   display: flex;
   align-items: center;
   padding: 20px;
 }
+
+p:hover {
+  color: #EDF5E1;
+}
+
 img {
   height: 80px;
 }
@@ -141,4 +147,13 @@ span {
 .buttons {
   display: flex;
   justify-content: center;
+}
+
+.footer {
+  background: black;
+  height: 50px;
+  width: 100%;
+  color: blue;
+  display: flex;
+  background-color: #EDF5E1;
 }

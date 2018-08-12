@@ -308,6 +308,7 @@ class App extends React.Component {
               functionExecute={this.createPost}/>
           : ''
         }
+        <Footer/>
       </div>
     )
   }
