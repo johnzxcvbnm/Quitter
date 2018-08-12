@@ -141,6 +141,12 @@ class App extends React.Component {
           logOut={this.logOut}
           changeSelectedUser={this.changeSelectedUser}/>
         {/* Conditionals that display the rest of the website's content */}
+        {
+          this.state.loggedUser ?
+            <UserSplash
+              loggedUser={this.state.loggedUser}/>
+          : ''
+        }
         {/*Post Listing Section (Default Main Page)*/}
         {
           this.state.page.postList ?
