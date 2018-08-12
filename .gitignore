@@ -1,5 +1,5 @@
 /log/*
 /tmp/*
-!/log/.keep
-!/tmp/.keep
 /tmp/cache/bootsnap-load-path-cache
+
+####
