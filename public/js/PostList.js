@@ -16,14 +16,16 @@ class PostList extends React.Component {
                   <span>
                     <button className="button is-warning">Edit Post</button>
                     <button className="button is-danger">Delete Post</button>
-                    <button className="button is-link">Like</button>
-                    <button className="button is-link">Comment</button>
                   </span>
-                :
+                : ''
+              }
+              {
+                this.props.loggedUser.id != 0 ?
                   <span>
                     <button className="button is-link">Like</button>
                     <button className="button is-link">Comment</button>
                   </span>
+                : ''
               }
               <hr />
             </div>

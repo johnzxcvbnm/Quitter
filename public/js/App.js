@@ -10,7 +10,10 @@ class App extends React.Component {
         userRegister: false,
         userShow: false,
         userEdit: false,
-        postList: true
+        postList: true,
+        postShow: false,
+        postForm: false,
+        postEdit: false
 
       }, //End of this.state.page
       //The current logged in user, if there is one
@@ -172,7 +175,8 @@ class App extends React.Component {
                 loggedUser={this.state.loggedUser}/>
               <PostList
                 posts={this.state.posts}
-                loggedUser={this.state.loggedUser}/>
+                loggedUser={this.state.loggedUser}
+                changePage={this.changePage}/>
             </span>
           : ''
         }
