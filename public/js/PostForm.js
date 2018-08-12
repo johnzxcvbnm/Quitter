@@ -22,18 +22,20 @@ class PostForm extends React.Component {
   render() {
     return (
       <div className="field">
-        <h1>Post Form</h1>
+        <h1>Write Your Post Here</h1>
         <form onSubmit={this.handleSubmit}>
           <label className="label" for="post_content">Content</label>
           <div className="control">
-            <input className="input" type="text" id="post_content" ref="post_content" />
+            <textarea className="input" type="text" id="post_content" ref="post_content"></textarea>
           </div>
           <label className="label" for="image">Image URL</label>
           <div className="control">
             <input className="input" type="text" id="image" ref="image" />
           </div>
-          <div className="control">
-            <input className="button is-primary" type="submit" />
+          <div className="submit">
+            <div className="control">
+              <input id="submit" className="button is-primary" type="submit" />
+            </div>
           </div>
         </form>
       </div>
