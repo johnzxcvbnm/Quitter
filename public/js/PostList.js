@@ -19,7 +19,11 @@ class PostList extends React.Component {
                 post.user_id == this.props.loggedUser.id ?
                   <span>
                     <button className="button is-warning">Edit Post</button>
-                    <button className="button is-danger">Delete Post</button>
+                    <button
+                      className="button is-danger"
+                      onClick={() => this.props.deletePost(post, index)}>
+                        Delete Post
+                    </button>
                   </span>
                 : ''
               }

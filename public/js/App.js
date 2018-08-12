@@ -23,6 +23,7 @@ class App extends React.Component {
       //A list of posts
       posts: []
     } //End of this.state
+    
     //Function Bindings
     this.changePage = this.changePage.bind(this);
     this.createUser = this.createUser.bind(this);
@@ -33,6 +34,7 @@ class App extends React.Component {
     this.editUser = this.editUser.bind(this);
     this.loadPosts = this.loadPosts.bind(this);
     this.createPost = this.createPost.bind(this);
+    this.deletePost = this.deletePost.bind(this);
   }//End of Constructor
 
   //Function used to load things on page load
@@ -138,15 +140,43 @@ class App extends React.Component {
     .catch(error => console.log(error))
   }
 
+  //Loads all the posts in the database and puts it into state
+  //loadPosts executes automatically on page load
+  //If there are no posts in the database to load a default post is loaded into state
   loadPosts() {
     fetch("/posts")
       .then(response => response.json())
         .then(all_posts => {
-          console.log(all_posts);
-          this.setState({posts: all_posts})
+          // console.log(all_posts);
+          if(all_posts[0] == null){
+            this.loadDefaultPost();
+          } else {
+            this.setState({posts: all_posts})
+          }
         }).catch(error => console.log(error));
   }
 
+  //Function creates a default post to load into state should there be no posts to load
+  //The post is removed automatically after a post has been made
+  //The post is automatically placed in if all the posts are deleted
+  loadDefaultPost(){
+    const default_post = [];
+    default_post.push({
+      id: 0,
+      post_content: "No one has posted anything yet!  Login and claim your birth right of creating the first post!",
+      image: "",
+      user_id: -1,
+      user_name: "Quitter Dev",
+      avatar: "https://d1ielco78gv5pf.cloudfront.net/assets/clear-495a83e08fc8e5d7569efe6339a1228ee08292fa1f2bee8e0be6532990cb3852.gif"
+    })
+    // console.log(default_post);
+    this.setState({posts: default_post});
+  }
+
+  //Function creates a new post in the database
+  //Function pushes a new post into the database then updates the state to reflect the update
+  //Should the only post be the default post then then default is removed before
+  //updating the state with the new post
   createPost(new_post){
     // console.log(new_post);
     fetch("/posts", {
@@ -161,15 +191,42 @@ class App extends React.Component {
       return createdPost.json()
     })
     .then(jsonedPost => {
+      const copy_array = this.state.posts;
+      //If the default post is the only post, which has a user_id of -1, then remove the default post
+      if(copy_array[0]["user_id"] == -1){
+        copy_array.pop();
+      }
       jsonedPost["user_name"] = this.state.loggedUser.user_name;
       jsonedPost["avatar"] = this.state.loggedUser.avatar;
-      console.log([jsonedPost, ...this.state.posts]);
-      this.setState({posts: [jsonedPost, ...this.state.posts]});
+      // console.log([jsonedPost, ...this.state.posts]);
+      //New posts are pushed to the top automatically
+      copy_array.unshift(jsonedPost);
+      this.setState({posts: copy_array});
       this.changePage("postList");
     })
   }
 
-  
+  //Function removes a post from the database
+  //Function first removes the post from the database then updates the
+  //current state.  If there are no more posts in the state then load the default post
+  deletePost(old_post, index){
+    // console.log("DELETING");
+    // console.log(old_post);
+    fetch("/posts/" + old_post.id, {
+      method: "DELETE"
+    })
+    .then(data => {
+      this.setState({
+        posts: [
+          ...this.state.posts.slice(0, index),
+          ...this.state.posts.slice(index + 1)
+        ]
+      })
+      if(this.state.posts.length == 0){
+        this.loadDefaultPost();
+      }
+    }).catch(error => console.log(error))
+  }
 
   //Render to the browser
   render() {
@@ -202,7 +259,9 @@ class App extends React.Component {
               <PostList
                 posts={this.state.posts}
                 loggedUser={this.state.loggedUser}
-                changePage={this.changePage}/>
+                changePage={this.changePage}
+                deletePost={this.deletePost}
+                />
             </span>
           : ''
         }
