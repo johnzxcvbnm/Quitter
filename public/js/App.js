@@ -154,10 +154,19 @@ class App extends React.Component {
           logOut={this.logOut}
           changeSelectedUser={this.changeSelectedUser}/>
         {/* Conditionals that display the rest of the website's content */}
-        {/* If the user is logged in, display their information at the top of the page */}
-        {/*Post Listing Section (Default Main Page)*/}
+        {/*Post Listing Section (Default Main Page) for guest users */}
         {
-          this.state.loggedUser ?
+          this.state.page.postList && !(this.state.loggedUser) ?
+            <span>
+              <PostList
+                posts={this.state.posts}
+                loggedUser={ {id: 0} }/>
+            </span>
+          : ''
+        }
+        {/* If the user is logged in, display their information at the top of the page along with the postList section */}
+        {
+          this.state.page.postList && this.state.loggedUser ?
             <span>
               <UserSplash
                 loggedUser={this.state.loggedUser}/>
@@ -165,12 +174,7 @@ class App extends React.Component {
                 posts={this.state.posts}
                 loggedUser={this.state.loggedUser}/>
             </span>
-          :
-            <span>
-              <PostList
-                posts={this.state.posts}
-                loggedUser={ {id: 0} }/>
-            </span>
+          : ''
         }
         {/*User Registration Section*/}
         {
