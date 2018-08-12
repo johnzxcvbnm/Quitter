@@ -10,13 +10,24 @@ class NavBar extends React.Component {
         {/* If the user is NOT logged in, display links to register (create new user) and login (login existing user) and create a new session */}
         {
           this.props.loggedUser ?
-            <div className="column" onClick={() => this.props.changePage("userShow")}>{this.props.loggedUser.user_name}</div>
+            <div className="column"
+                 onClick={() => {
+                   this.props.changeSelectedUser(this.props.loggedUser);
+                   this.props.changePage("userShow");}}>
+              {this.props.loggedUser.user_name}
+            </div>
           :
             <div className="column" onClick={() => this.props.changePage("userLogin")}>Login</div>
         }
         {
           this.props.loggedUser ?
-            <div className="column" onClick={() => {this.props.logOut(); this.props.changePage("postList"); }}>Log Out</div>
+            <div
+              className="column"
+              onClick={() => {
+                  this.props.logOut();
+                  this.props.changePage("postList"); }}>
+              Log Out
+            </div>
           :
             <div className="column" onClick={() => this.props.changePage("userRegister")}>Register</div>
         }
