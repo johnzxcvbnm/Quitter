@@ -51,12 +51,17 @@ img {
   border: 2px solid #EDF5E1;
   color: #EDF5E1;
   margin-bottom: 500px;
+  width: 80%;
 }
 .field label {
   color: #EDF5E1;
 }
 .field h1 {
   color: #EDF5E1;
+}
+
+.field input {
+  height: 30px;
 }
 
 .user_splash {
@@ -104,11 +109,30 @@ span {
 }
 
 
-/* .user {
-  display: flex;
-  flex-direction: column;
-} */
 .avatar img {
   background-color: #EDF5E1;
   border-radius: 100px;
+}
+
+.field input {
+  width: 100%;
+}
+
+.field textarea {
+  min-height: 300px;
+  width: 100%;
+}
+
+.control {
+  margin: 20px 0;
+  border-radius: 10px;
+  background-color: #05386B;
+  text-align: center;
+}
+.submit {
+  background-color: #05386B;
+}
+.submit input {
+  width: 20%;
+  margin: 0 auto;
 }
