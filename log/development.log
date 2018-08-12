@@ -830,3 +830,9 @@ Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms)
 >>>>>>> 5e1dcccdf2ff4e00edb128ce24bc8fa652f4463b
 
 
+Started GET "/users/1" for 127.0.0.1 at 2018-08-12 10:04:47 -0500
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"1"}
+Completed 200 OK in 83ms (Views: 2.3ms | ActiveRecord: 0.0ms)
+
+
