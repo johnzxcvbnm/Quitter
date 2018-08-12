@@ -642,3 +642,9 @@ Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms)
 >>>>>>> 2a9ca7807de44c4c17b8dd6875c17790fb642827
 
 
+Started GET "/users/1" for 127.0.0.1 at 2018-08-12 10:04:47 -0500
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"1"}
+Completed 200 OK in 83ms (Views: 2.3ms | ActiveRecord: 0.0ms)
+
+
