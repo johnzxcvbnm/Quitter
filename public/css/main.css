@@ -72,4 +72,5 @@ img {
   color: red;
   background-color: orange;
   color: orange;
+  display: flex;
 }
