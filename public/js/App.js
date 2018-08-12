@@ -23,7 +23,6 @@ class App extends React.Component {
       //A list of posts
       posts: []
     } //End of this.state
-    
     //Function Bindings
     this.changePage = this.changePage.bind(this);
     this.createUser = this.createUser.bind(this);
@@ -139,10 +138,10 @@ class App extends React.Component {
     })
     .catch(error => console.log(error))
   }
-
   //Loads all the posts in the database and puts it into state
-  //loadPosts executes automatically on page load
-  //If there are no posts in the database to load a default post is loaded into state
+   //loadPosts executes automatically on page load
+   //If there are no posts in the database to load a default post is loaded into state
+
   loadPosts() {
     fetch("/posts")
       .then(response => response.json())
@@ -177,6 +176,7 @@ class App extends React.Component {
   //Function pushes a new post into the database then updates the state to reflect the update
   //Should the only post be the default post then then default is removed before
   //updating the state with the new post
+
   createPost(new_post){
     // console.log(new_post);
     fetch("/posts", {
@@ -195,7 +195,6 @@ class App extends React.Component {
       //If the default post is the only post, which has a user_id of -1, then remove the default post
       if(copy_array[0]["user_id"] == -1){
         copy_array.pop();
-      }
       jsonedPost["user_name"] = this.state.loggedUser.user_name;
       jsonedPost["avatar"] = this.state.loggedUser.avatar;
       // console.log([jsonedPost, ...this.state.posts]);
@@ -203,30 +202,31 @@ class App extends React.Component {
       copy_array.unshift(jsonedPost);
       this.setState({posts: copy_array});
       this.changePage("postList");
-    })
+    }
+  })
   }
 
   //Function removes a post from the database
-  //Function first removes the post from the database then updates the
-  //current state.  If there are no more posts in the state then load the default post
-  deletePost(old_post, index){
-    // console.log("DELETING");
-    // console.log(old_post);
-    fetch("/posts/" + old_post.id, {
-      method: "DELETE"
-    })
-    .then(data => {
-      this.setState({
-        posts: [
-          ...this.state.posts.slice(0, index),
-          ...this.state.posts.slice(index + 1)
-        ]
+    //Function first removes the post from the database then updates the
+    //current state.  If there are no more posts in the state then load the default post
+    deletePost(old_post, index){
+      // console.log("DELETING");
+      // console.log(old_post);
+      fetch("/posts/" + old_post.id, {
+        method: "DELETE"
       })
-      if(this.state.posts.length == 0){
-        this.loadDefaultPost();
-      }
-    }).catch(error => console.log(error))
-  }
+      .then(data => {
+        this.setState({
+          posts: [
+            ...this.state.posts.slice(0, index),
+            ...this.state.posts.slice(index + 1)
+          ]
+        })
+        if(this.state.posts.length == 0){
+          this.loadDefaultPost();
+        }
+      }).catch(error => console.log(error))
+    }
 
   //Render to the browser
   render() {
@@ -260,8 +260,7 @@ class App extends React.Component {
                 posts={this.state.posts}
                 loggedUser={this.state.loggedUser}
                 changePage={this.changePage}
-                deletePost={this.deletePost}
-                />
+                deletePost={this.deletePost}/>
             </span>
           : ''
         }

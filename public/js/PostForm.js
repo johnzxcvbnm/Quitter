@@ -23,7 +23,7 @@ class PostForm extends React.Component {
     return (
       <div className="field">
         <h1>Write Your Post Here</h1>
-        <form onSubmit={this.handleSubmit}>
+        <form className="post_form" onSubmit={this.handleSubmit}>
           <label className="label" for="post_content">Content</label>
           <div className="control">
             <textarea className="input" type="text" id="post_content" ref="post_content"></textarea>

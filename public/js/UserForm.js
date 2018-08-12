@@ -70,7 +70,9 @@ class UserForm extends React.Component {
                 </div>
               </span>
           }
-          <input className="button is-primary" type="submit" />
+          <div className="submit">
+            <input className="button is-primary" type="submit" />
+          </div>
         </form>
       </div>
     )

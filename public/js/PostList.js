@@ -10,10 +10,6 @@ class PostList extends React.Component {
                 <h3><b>Content: </b>{post.post_content}</h3>
                 <h3 ><b>Post Image: </b><img src={post.image}/></h3>
               </div>
-              <div className="user">
-                <div className="avatar"><img src={post.avatar}/></div>
-              </div>
-              <h3><b>Posted By: </b>{post.user_name}</h3>
               {/* If the user created this post, then allow them to edit it */}
               {
                 post.user_id == this.props.loggedUser.id ?
@@ -29,12 +25,16 @@ class PostList extends React.Component {
               }
               {
                 this.props.loggedUser.id != 0 ?
-                  <span>
+                  <div className="buttons">
                     <button className="button is-link">Like</button>
                     <button className="button is-link">Comment</button>
-                  </span>
+                  </div>
                 : ''
               }
+              <div className="user">
+                <div className="avatar"><img src={post.avatar}/></div>
+              </div>
+              <h3><b>Posted By: </b>{post.user_name}</h3>
               <hr />
             </div>
           )
