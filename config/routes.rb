@@ -6,6 +6,13 @@ Rails.application.routes.draw do
   delete '/users/:id', to: 'users#delete'
   put '/users/:id', to: 'users#update'
 
+
+  get '/likes', to: 'likes#index'
+  get '/likes/:id', to: 'likes#show'
+  post '/likes', to: 'likes#create'
+  delete '/likes/:id', to: 'likes#delete'
+  put '/likes/:id', to: 'likes#update'
+  
   get '/posts', to: 'posts#index'
   get '/posts/:id', to: 'posts#show'
   post '/posts', to: 'posts#create'
