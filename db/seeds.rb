@@ -10,13 +10,32 @@
 #   User.create(
 #     "user_name" => "#{Faker::Internet.user_name}",
 #     "password" => "#{Faker::Internet.password}",
-#     "avatar" => "#{Faker::Avatar.image}"
+#     "avatar" => "#{Faker::Avatar.image}",
+#       "post_id" => "#{Faker::Number.digit}"
 #   )
 # end
 
 
-10.times do
-  Like.create(
+# 10.times do
+#   Like.create(
+#     "user_id" => "#{Faker::Number.digit}",
+#     "post_id" => "#{Faker::Number.digit}"
+#   )
+# end
+
+#
+# 10.times do
+#   Post.create(
+#     "post_content" => "#{Faker::Community.quotes}",
+#     "image" => "#{Faker::Avatar.image}",
+#     "user_id" => "#{Faker::Number.digit}"
+#   )
+# end
+
+5.times do
+  Comment.create(
+    "comment_content" => "#{Faker::Community.quotes}",
+    "image" => "#{Faker::Avatar.image}",
     "user_id" => "#{Faker::Number.digit}",
     "post_id" => "#{Faker::Number.digit}"
   )
