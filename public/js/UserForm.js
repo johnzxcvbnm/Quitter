@@ -52,11 +52,11 @@ class UserForm extends React.Component {
         <h1>{this.props.title}</h1>
         <form onSubmit={this.handleSubmit}>
           <label className="label" for="user_name">User Name</label>
-          <div className="cotrol">
+          <div className="control">
             <input className="input" type="text" id="user_name" ref="user_name" />
           </div>
           <label className="label" for="password">User Password</label>
-          <div className="cotrol">
+          <div className="control">
             <input className="input" type="password" id="password" ref="password"/>
           </div>
           {/*If the user is trying to login, do not use the avatar input field*/}
@@ -65,7 +65,7 @@ class UserForm extends React.Component {
               '' :
               <span>
                 <label className="label" for="avatar">Avatar</label>
-                <div className="cotrol">
+                <div className="control">
                   <input className="input" type="text" id="avatar" ref="avatar"/>
                 </div>
               </span>
