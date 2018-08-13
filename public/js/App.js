@@ -348,7 +348,9 @@ class App extends React.Component {
             <UserForm
               login={true}
               functionExecute={this.loginUser}
-              title="User Login"/>
+              title="User Login"
+              errorNoUser={this.state.errorNoUser}
+              errorWrongPassword={this.state.errorWrongPassword}/>
           : ''
         }
         {/* User Edit Page */}

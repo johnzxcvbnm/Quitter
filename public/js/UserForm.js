@@ -50,14 +50,27 @@ class UserForm extends React.Component {
     return (
       <div className="field">
         <h1>{this.props.title}</h1>
+        {/* Error Messages */}
+        {/* User Name not found */}
+        {
+          this.props.errorNoUser ?
+            <h2 className="error_message">User Name not found</h2>
+          : ''
+        }
+        {/* Password entered incorrectly */}
+        {
+          this.props.errorWrongPassword ?
+            <h2 className="error_message">Wrong Password</h2>
+          : ''
+        }
         <form onSubmit={this.handleSubmit}>
           <label className="label" for="user_name">User Name</label>
           <div className="control">
-            <input className="input" type="text" id="user_name" ref="user_name" />
+            <input className="input" type="text" id="user_name" ref="user_name" required />
           </div>
           <label className="label" for="password">User Password</label>
           <div className="control">
-            <input className="input" type="password" id="password" ref="password"/>
+            <input className="input" type="password" id="password" ref="password" required />
           </div>
           {/*If the user is trying to login, do not use the avatar input field*/}
           {
