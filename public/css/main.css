@@ -19,6 +19,13 @@ main {
 .one_post {
   color: #05386B;
   background-color: #8EE4AF;
+  padding-top: 10px;
+}
+
+.one_comment {
+  color: #05386B;
+  background-color: #8EE4AF;
+  padding-top: 10px;
 }
 .container {
   display: flex;
@@ -125,10 +132,6 @@ span {
   border-radius: 10px;
 }
 
-.one_post {
-  padding-top: 10px;
-}
-
 
 .avatar img {
   background-color: #EDF5E1;
@@ -202,16 +205,17 @@ span {
 }
 
 
-.user_post {
-    color: #05386B;
-    background-color: #8EE4AF;
-  }
 
   .user_show div {
     margin: 0 auto;
     border-radius: 10px;
     margin-bottom: 20px;
     width: 100%;
+  }
+
+  .user_show h1 {
+    text-align: center;
+    font-size: 50px;
   }
 
 
@@ -246,4 +250,8 @@ span {
 .user_pic {
   width: 500px;
   height: auto;
+}
+
+.user_show button {
+  margin: 40px;
 }
