@@ -23,7 +23,8 @@ class App extends React.Component {
       //A list of posts
       posts: [],
       //The currently selected post, pulled from the database
-      selectedPost: {}
+      selectedPost: {},
+      selectedPostIndex: 0
 
     } //End of this.state
     //Function Bindings
@@ -213,9 +214,10 @@ class App extends React.Component {
   //Function removes a post from the database
     //Function first removes the post from the database then updates the
     //current state.  If there are no more posts in the state then load the default post
+    //Function then redirects the user to the main page (postList)
     deletePost(old_post, index){
-      // console.log("DELETING");
-      // console.log(old_post);
+      console.log("DELETING");
+      console.log(old_post);
       fetch("/posts/" + old_post.id, {
         method: "DELETE"
       })
@@ -229,12 +231,20 @@ class App extends React.Component {
         if(this.state.posts.length == 0){
           this.loadDefaultPost();
         }
+        this.changePage("postList");
       }).catch(error => console.log(error))
     }
 
-    selectPost(post) {
+    selectPost(post, index) {
       console.log("Selected Post");
       console.log(post);
+      fetch("/posts/" + post.id)
+        .then(response => response.json())
+          .then(my_post => {
+            this.setState({selectedPost: my_post,
+                           selectedPostIndex: index});
+            this.changePage("postShow");
+          }).catch(error => console.log(error));
     }
 
   //Render to the browser
@@ -321,11 +331,23 @@ class App extends React.Component {
         }
         {/* Show post page */}
         {
-          this.state.page.postShow ?
+          this.state.page.postShow && this.state.loggedUser ?
             <PostShow
               loggedUser={this.state.loggedUser}
               changePage={this.changePage}
-              post={this.state.selectedPost}/>
+              post={this.state.selectedPost}
+              postIndex={this.state.selectedPostIndex}
+              deletePost={this.deletePost}/>
+          : ''
+        }
+        {
+          this.state.page.postShow && !(this.state.loggedUser) ?
+            <PostShow
+              loggedUser={ {id: 0} }
+              changePage={this.changePage}
+              post={this.state.selectedPost}
+              postIndex={this.state.selectedPostIndex}
+              deletePost={this.deletePost}/>
           : ''
         }
         <Footer/>
