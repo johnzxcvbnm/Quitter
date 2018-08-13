@@ -11,7 +11,11 @@ class PostShow extends React.Component {
           {
             this.props.post.user_id == this.props.loggedUser.id ?
               <span>
-                <button className="button is-warning">Edit Post</button>
+                <button
+                  className="button is-warning"
+                  onClick={() => this.props.changePage("postEdit") }>
+                    Edit Post
+                </button>
                 <button
                   className="button is-danger"
                   onClick={() => this.props.deletePost(this.props.post, this.props.postIndex)}>

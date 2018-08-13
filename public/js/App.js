@@ -39,6 +39,7 @@ class App extends React.Component {
     this.createPost = this.createPost.bind(this);
     this.deletePost = this.deletePost.bind(this);
     this.selectPost = this.selectPost.bind(this);
+    this.editPost = this.editPost.bind(this);
   }//End of Constructor
 
   //Function used to load things on page load
@@ -207,47 +208,52 @@ class App extends React.Component {
       copy_array.unshift(jsonedPost);
       this.setState({posts: copy_array});
       this.changePage("postList");
-    }
-  })
+    }})
   }
 
   //Function removes a post from the database
-    //Function first removes the post from the database then updates the
-    //current state.  If there are no more posts in the state then load the default post
-    //Function then redirects the user to the main page (postList)
-    deletePost(old_post, index){
-      console.log("DELETING");
-      console.log(old_post);
-      fetch("/posts/" + old_post.id, {
-        method: "DELETE"
+  //Function first removes the post from the database then updates the
+  //current state.  If there are no more posts in the state then load the default post
+  //Function then redirects the user to the main page (postList)
+  deletePost(old_post, index){
+    console.log("DELETING");
+    console.log(old_post);
+    fetch("/posts/" + old_post.id, {
+      method: "DELETE"
+    })
+    .then(data => {
+      this.setState({
+        posts: [
+          ...this.state.posts.slice(0, index),
+          ...this.state.posts.slice(index + 1)
+        ]
       })
-      .then(data => {
-        this.setState({
-          posts: [
-            ...this.state.posts.slice(0, index),
-            ...this.state.posts.slice(index + 1)
-          ]
-        })
-        if(this.state.posts.length == 0){
-          this.loadDefaultPost();
-        }
-        this.changePage("postList");
-      }).catch(error => console.log(error))
-    }
-
-    selectPost(post, index) {
-      // console.log("Selected Post");
-      // console.log(post);
-      if(post.id != 0){
-        fetch("/posts/" + post.id)
-          .then(response => response.json())
-            .then(my_post => {
-              this.setState({selectedPost: my_post,
-                             selectedPostIndex: index});
-              this.changePage("postShow");
-            }).catch(error => console.log(error));
+      if(this.state.posts.length == 0){
+        this.loadDefaultPost();
       }
+      this.changePage("postList");
+    }).catch(error => console.log(error))
+  }
+
+  selectPost(post, index) {
+    // console.log("Selected Post");
+    // console.log(post);
+    if(post.id != 0){
+      fetch("/posts/" + post.id)
+        .then(response => response.json())
+          .then(my_post => {
+            this.setState({selectedPost: my_post,
+                           selectedPostIndex: index});
+            this.changePage("postShow");
+          }).catch(error => console.log(error));
     }
+  }
+
+  editPost(new_post){
+    console.log("Editing Post");
+    console.log(new_post);
+
+  }
 
   //Render to the browser
   render() {
@@ -329,6 +335,16 @@ class App extends React.Component {
               changePage={this.changePage}
               loggedUser={this.state.loggedUser}
               functionExecute={this.createPost}/>
+          : ''
+        }
+        {/* Edit Post Section */}
+        {
+          this.state.page.postEdit ?
+            <PostForm
+              changePage={this.changePage}
+              loggedUser={this.state.loggedUser}
+              functionExecute={this.editPost}
+              post={this.state.selectedPost}/>
           : ''
         }
         {/* Show post page */}

@@ -6,8 +6,12 @@ class PostForm extends React.Component {
 
   //Used for Edit Posts
   componentDidMount() {
-
+    if(this.props.post){
+      this.refs.post_content.value = this.props.post.post_content;
+      this.refs.image.value = this.props.post.image;
+    }
   }
+
   handleSubmit(event) {
     event.preventDefault();
 
@@ -17,8 +21,13 @@ class PostForm extends React.Component {
       user_id: this.props.loggedUser.id
     }
 
+    if(this.props.post){
+      new_post["id"] = this.props.post.id;
+    }
+
     this.props.functionExecute(new_post);
   }
+
   render() {
     return (
       <div className="field">
