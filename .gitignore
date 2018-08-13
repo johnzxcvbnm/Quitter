@@ -1,4 +1,4 @@
 /log/*
 /tmp/*
-/tmp/cache/assets/bootsnap-load-path-cache
-/log/development.log
+tmp/cache/assets/bootsnap-load-path-cache
+log/development.log
