@@ -1,3 +1,5 @@
+//Class PostShow is used to display all the information from a single post provided from the parent class
+//PostShow is also where the user can EDIT or DELETE posts that they have made
 class PostShow extends React.Component {
   render() {
     return (
@@ -11,7 +13,11 @@ class PostShow extends React.Component {
           {
             this.props.post.user_id == this.props.loggedUser.id ?
               <span>
-                <button className="button is-warning">Edit Post</button>
+                <button
+                  className="button is-warning"
+                  onClick={() => this.props.changePage("postEdit") }>
+                    Edit Post
+                </button>
                 <button
                   className="button is-danger"
                   onClick={() => this.props.deletePost(this.props.post, this.props.postIndex)}>
