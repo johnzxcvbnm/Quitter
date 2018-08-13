@@ -256,6 +256,7 @@ span {
   margin: 40px;
 }
 
-.nothing {
-  color: red;
+.error_message {
+  color: darkorange;
+  text-align: center;
 }
