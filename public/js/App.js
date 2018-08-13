@@ -252,7 +252,21 @@ class App extends React.Component {
   editPost(new_post){
     console.log("Editing Post");
     console.log(new_post);
-
+    fetch("/posts/" + new_post.id, {
+      body: JSON.stringify(new_post),
+      method: "PUT",
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(updatedPost => {
+      return updatedPost.json()
+    })
+    .then(jsonedPost => {
+      this.loadPosts();
+      this.changePage("postList");
+    })
   }
 
   //Render to the browser
