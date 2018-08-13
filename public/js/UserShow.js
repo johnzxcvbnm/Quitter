@@ -7,13 +7,18 @@ class UserShow extends React.Component {
         <h1>Welcome to Quitter, {this.props.selectedUser.user_name}</h1>
         <h2>Password: {this.props.selectedUser.password}</h2>
         <img src={this.props.selectedUser.avatar}/>
+        {this.props.selectedUser.posts.map((post, index) => {
+          return (
+            <h1>{post.post_content}</h1>
+          )
+        })
+        }
         {/* If the selectedUser is also the loggedUser then allow them to edit their user information */}
         {
           (this.props.selectedUser == this.props.loggedUser)?
             <button className="button is-link" onClick={() => this.props.changePage("userEdit")}>Edit User</button>
           : ''
         }
-        {console.log(this.props.loggedUser)}
       </div>
     )
   }
