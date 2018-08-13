@@ -53,6 +53,7 @@ class User
     end
     return users
   end
+
   def self.find(id)
     results = DB.exec(
         <<-SQL
@@ -142,6 +143,60 @@ class User
         "password" => results.first["password"],
         "avatar" => results.first["avatar"],
         "post_id" => results.first["post_id"]
+    }
+  end
+  def self.findByName(name)
+    results = DB.exec(
+        <<-SQL
+          SELECT users.*,
+          posts.id as post_id,
+          posts.post_content as post_content,
+          posts.image as post_image,
+          posts.user_id as post_user_id,
+          comments.id as comment_id,
+          comments.comment_content as comment_content,
+          comments.image as comment_image,
+          comments.user_id as comment_user_id,
+          comments.post_id as comment_post_id
+          FROM users
+          LEFT JOIN posts
+            ON users.id = posts.user_id
+          LEFT JOIN comments
+            ON users.id = comments.user_id
+          WHERE user_name =#{name};
+        SQL
+    )
+    posts = []
+    results.each do |result|
+      if result["post_id"]
+        posts.push({
+          "id" => result["post_id"].to_i,
+          "post_content" => result["post_content"],
+          "image" => result["post_image"],
+          "user_name" => result["user_name"],
+          "avatar" => result["avatar"]
+          })
+      end
+    end
+    comments = []
+    results.each do |result|
+      if result["comment_id"]
+        comments.push({
+          "id" => result["comment_id"].to_i,
+          "comment_content" => result["comment_content"],
+          "image" => result["comment_image"],
+          "user_name" => result["user_name"]
+          })
+      end
+    end
+    return {
+        "id" => results.first["id"].to_i,
+        "user_name" => results.first["user_name"],
+        "password" => results.first["password"],
+        "avatar" => results.first["avatar"],
+        "post_id" => results.first["post_id"],
+        "posts" => posts,
+        "comments" => comments
     }
   end
 end

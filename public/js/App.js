@@ -16,6 +16,10 @@ class App extends React.Component {
         postEdit: false
 
       }, //End of this.state.page
+      //Login Error - No user found
+      errorNoUser: false,
+      //Login Error - Password submitted does not match stored password
+      errorWrongPassword: false,
       //The current logged in user, if there is one
       loggedUser: null,
       //Used for user show pages
@@ -103,16 +107,31 @@ class App extends React.Component {
   }
 
   //Function calls the server to login user
-  //Currently the server automatically logs the user in as the first user ID until further updated
+  //Function first sets the login error messages to false to prevent them from showing up
+  //Then the function looks for the user_name in the database
+  //If the username is found it checks the password in the database against the submitted password
+  //If the passwords match, log in that user
+  //If the passwords do NOT match, set the corresponding error message to true and do nothing else
+  //If the user_name is NOT found, set the corresponding error message to true and do nothing else
   loginUser(new_user){
     // console.log("Logging In User");
     // console.log(new_user);
-    fetch("/users/1")
+    this.setState({ errorNoUser: false,
+                    errorWrongPassword: false});
+    fetch("/users/find/'" + new_user.user_name + "'")
       .then(response => response.json())
         .then(logged_user => {
-          this.setUser(logged_user);
-          this.changePage("postList");
-        }).catch(error => console.log(error));
+          if(new_user.password === logged_user.password){
+            this.setUser(logged_user);
+            this.changePage("postList");
+          } else {
+            this.setState({ errorWrongPassword: true });
+            console.log("Wrong Password");
+          }
+        }).catch(error => {
+            console.log(error);
+            this.setState({ errorNoUser: true });
+        });
   }
 
   //Function changes the selected user.
@@ -334,7 +353,9 @@ class App extends React.Component {
             <UserForm
               login={true}
               functionExecute={this.loginUser}
-              title="User Login"/>
+              title="User Login"
+              errorNoUser={this.state.errorNoUser}
+              errorWrongPassword={this.state.errorWrongPassword}/>
           : ''
         }
         {/* User Edit Page */}
