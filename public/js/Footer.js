@@ -3,17 +3,19 @@ class Footer extends React.Component{
     return(
       <div className="footer">
         <div className="columns">
-          <div className="column is-4">
-            <div className="column">
-            <p>Column links to our GitHub Pages</p>
+            <div className="column is-3">
+              <a href="https://johnzxcvbnm.github.io/">John Kusching</a>
+              <a href="https://johnzxcvbnm.github.io/">John Kusching</a>
+              <a href="https://johnzxcvbnm.github.io/">John Kusching</a>
             </div>
-            <div className="column">
-            <p>Team/Company Name</p>
+            <div className="column is-3">
+            <p>A John, Cordero and Joseph Joint</p>
             </div>
-            <div className="column">
-            <p>Legal Mumbo Jumbo</p>
+            <div className="column is-3">
+              <a href="https://www.reddit.com/r/birdswitharms">Birds w/ arms</a>
+              <a href="http://www.nooooooooooooooo.com/">Vader No</a>
+              <a href="https://cat-bounce.com/">Cat Bounce</a>
             </div>
-          </div>
         </div>
       </div>
 

@@ -43,16 +43,32 @@ class User
   def self.find(id)
     results = DB.exec(
         <<-SQL
-          SELECT *
+          SELECT users.*,
+          posts.id as postid,
+          posts.post_content,
+          posts.user_id
           FROM users
-          WHERE id =#{id};
+          LEFT JOIN posts
+          ON users.id = posts.user_id
+          WHERE users.id =#{id};
         SQL
     )
+    posts = []
+    results.each do |result|
+      if result["postid"]
+        posts.push({
+          "id" => result["id"].to_i,
+          "post_content" => result["post_content"],
+          "post id" => result["postid"].to_i,
+          })
+        end
+      end
     return {
         "id" => results.first["id"].to_i,
         "user_name" => results.first["user_name"],
         "password" => results.first["password"],
-        "avatar" => results.first["avatar"]
+        "avatar" => results.first["avatar"],
+        "posts" => posts
     }
   end
 

@@ -33,8 +33,8 @@ class PostList extends React.Component {
               }
               <div className="user">
                 <div className="avatar"><img src={post.avatar}/></div>
+                <h3>{post.user_name}</h3>
               </div>
-              <h3><b>Posted By: </b>{post.user_name}</h3>
               <hr />
             </div>
           )
