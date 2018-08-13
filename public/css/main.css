@@ -255,3 +255,7 @@ span {
 .user_show button {
   margin: 40px;
 }
+
+.nothing {
+  color: red;
+}
