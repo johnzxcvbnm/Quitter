@@ -54,7 +54,7 @@ class UserForm extends React.Component {
         {/* User Name not found */}
         {
           this.props.errorNoUser ?
-            <h2 className="error_message">User Name not found</h2>
+            <h2 className="error_message">User not found</h2>
           : ''
         }
         {/* Password entered incorrectly */}
