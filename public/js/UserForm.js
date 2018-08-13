@@ -26,7 +26,7 @@ class UserForm extends React.Component {
     //If there is no avatar input field, create one by default.
     //Used to prevent errors between user Register and user Login
     if(!(this.refs.avatar)){
-      this.refs["avatar"] = { value: "Test" };
+      this.refs["avatar"] = { value: "Nunya Business" };
     }
 
     //Create new user from the form data

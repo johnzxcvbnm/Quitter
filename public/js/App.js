@@ -105,8 +105,8 @@ class App extends React.Component {
   //Function calls the server to login user
   //Currently the server automatically logs the user in as the first user ID until further updated
   loginUser(new_user){
-    // console.log("Logging In User");
-    // console.log(new_user);
+    console.log("Logging In User");
+    console.log(new_user);
     fetch("/users/1")
       .then(response => response.json())
         .then(logged_user => {
