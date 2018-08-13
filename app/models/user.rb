@@ -81,7 +81,8 @@ class User
           "id" => result["post_id"].to_i,
           "post_content" => result["post_content"],
           "image" => result["post_image"],
-          "user_name" => result["user_name"]
+          "user_name" => result["user_name"],
+          "avatar" => result["avatar"]
           })
       end
     end
