@@ -1,3 +1,5 @@
+//Class PostShow is used to display all the information from a single post provided from the parent class
+//PostShow is also where the user can EDIT or DELETE posts that they have made
 class PostShow extends React.Component {
   render() {
     return (

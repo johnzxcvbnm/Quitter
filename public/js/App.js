@@ -144,10 +144,10 @@ class App extends React.Component {
     })
     .catch(error => console.log(error))
   }
-  //Loads all the posts in the database and puts it into state
-   //loadPosts executes automatically on page load
-   //If there are no posts in the database to load a default post is loaded into state
 
+  //Loads all the posts in the database and puts it into state
+  //loadPosts executes automatically on page load
+  //If there are no posts in the database to load a default post is loaded into state
   loadPosts() {
     fetch("/posts")
       .then(response => response.json())
@@ -182,8 +182,8 @@ class App extends React.Component {
   //Function pushes a new post into the database then updates the state to reflect the update
   //Should the only post be the default post then then default is removed before
   //updating the state with the new post
-
   createPost(new_post){
+    // console.log("Posting");
     // console.log(new_post);
     fetch("/posts", {
       body: JSON.stringify(new_post),
@@ -201,6 +201,7 @@ class App extends React.Component {
       //If the default post is the only post, which has a user_id of -1, then remove the default post
       if(copy_array[0]["user_id"] == -1){
         copy_array.pop();
+      }
       jsonedPost["user_name"] = this.state.loggedUser.user_name;
       jsonedPost["avatar"] = this.state.loggedUser.avatar;
       // console.log([jsonedPost, ...this.state.posts]);
@@ -208,7 +209,7 @@ class App extends React.Component {
       copy_array.unshift(jsonedPost);
       this.setState({posts: copy_array});
       this.changePage("postList");
-    }})
+    })
   }
 
   //Function removes a post from the database
@@ -216,8 +217,8 @@ class App extends React.Component {
   //current state.  If there are no more posts in the state then load the default post
   //Function then redirects the user to the main page (postList)
   deletePost(old_post, index){
-    console.log("DELETING");
-    console.log(old_post);
+    // console.log("DELETING");
+    // console.log(old_post);
     fetch("/posts/" + old_post.id, {
       method: "DELETE"
     })
@@ -235,6 +236,13 @@ class App extends React.Component {
     }).catch(error => console.log(error))
   }
 
+  //Function is used to call the database to retrive all the information about
+  //one selected post (likes, comments, etc)
+  //Function first checks to see if the selected post is the default post
+  //Function does not call the database or updates anything with the default post
+  //After the database is called the selected post and post index (used for deletion)
+  //are updated in the current state
+  //The user is then redirected to the postShow page to display the selected post information
   selectPost(post, index) {
     // console.log("Selected Post");
     // console.log(post);
@@ -249,9 +257,13 @@ class App extends React.Component {
     }
   }
 
+  //Function is used to edit an existing post in the database
+  //Function calls the database and makes a PUT request with the new_post
+  //If successful the function calls the database again to correctly update the state
+  //and redirects the user back to the selected post
   editPost(new_post){
-    console.log("Editing Post");
-    console.log(new_post);
+    // console.log("Editing Post");
+    // console.log(new_post);
     fetch("/posts/" + new_post.id, {
       body: JSON.stringify(new_post),
       method: "PUT",
@@ -265,7 +277,8 @@ class App extends React.Component {
     })
     .then(jsonedPost => {
       this.loadPosts();
-      this.changePage("postList");
+      this.setState({ selectedPost: jsonedPost });
+      this.changePage("postShow");
     })
   }
 

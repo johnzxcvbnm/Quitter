@@ -1,3 +1,4 @@
+//Class PostList is used to display all the posts on the main section of the website
 class PostList extends React.Component {
   render() {
     return (
