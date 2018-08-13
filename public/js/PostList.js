@@ -24,7 +24,7 @@ class PostList extends React.Component {
                 : ''
               }
               {
-                this.props.loggedUser.id != 0 ?
+                this.props.loggedUser.id != 0 && post.user_id != -1 ?
                   <div className="buttons">
                     <button className="button is-link">Like</button>
                     <button className="button is-link">Comment</button>

@@ -21,7 +21,10 @@ class App extends React.Component {
       //Used for user show pages
       selectedUser: null,
       //A list of posts
-      posts: []
+      posts: [],
+      //The currently selected post, pulled from the database
+      selectedPost: {}
+
     } //End of this.state
     //Function Bindings
     this.changePage = this.changePage.bind(this);
@@ -34,6 +37,7 @@ class App extends React.Component {
     this.loadPosts = this.loadPosts.bind(this);
     this.createPost = this.createPost.bind(this);
     this.deletePost = this.deletePost.bind(this);
+    this.selectPost = this.selectPost.bind(this);
   }//End of Constructor
 
   //Function used to load things on page load
@@ -228,6 +232,11 @@ class App extends React.Component {
       }).catch(error => console.log(error))
     }
 
+    selectPost(post) {
+      console.log("Selected Post");
+      console.log(post);
+    }
+
   //Render to the browser
   render() {
     return (
@@ -245,7 +254,8 @@ class App extends React.Component {
             <span>
               <PostList
                 posts={this.state.posts}
-                loggedUser={ {id: 0} }/>
+                loggedUser={ {id: 0} }
+                selectPost={this.selectPost}/>
             </span>
           : ''
         }
@@ -260,7 +270,8 @@ class App extends React.Component {
                 posts={this.state.posts}
                 loggedUser={this.state.loggedUser}
                 changePage={this.changePage}
-                deletePost={this.deletePost}/>
+                deletePost={this.deletePost}
+                selectPost={this.selectPost}/>
             </span>
           : ''
         }
@@ -306,6 +317,15 @@ class App extends React.Component {
               changePage={this.changePage}
               loggedUser={this.state.loggedUser}
               functionExecute={this.createPost}/>
+          : ''
+        }
+        {/* Show post page */}
+        {
+          this.state.page.postShow ?
+            <PostShow
+              loggedUser={this.state.loggedUser}
+              changePage={this.changePage}
+              post={this.state.selectedPost}/>
           : ''
         }
         <Footer/>
