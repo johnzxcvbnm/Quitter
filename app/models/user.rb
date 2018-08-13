@@ -1,77 +1,111 @@
 class User
   DB = PG.connect({ :host => "localhost", :port => 5432, :dbname => 'quitter_app_development'})
-
   def self.all
     results = DB.exec(
         <<-SQL
           SELECT
            users.*,
            posts.id AS post_id,
-           posts.post_content, posts.user_id
+           posts.post_content,
+           posts.user_id,
+           comments.id AS comment_id,
+           comments.comment_content,
+           comments.image
           FROM users
           LEFT JOIN posts
-            ON users.id = posts.user_id
+            ON posts.user_id = users.id
+          LEFT JOIN comments
+            ON users.id = comments.user_id
           ORDER BY users.id;
         SQL
     )
     users = []
-    last_id = nil
+    last_user_id = nil
     results.each do |result|
-      if result["id"] != last_id
-        users.push({
+      if result["id"] != last_user_id
+      new_user = {
         "id" => result["id"].to_i,
         "user_name" => result["user_name"],
         "password" => result["password"],
         "avatar" => result["avatar"],
-        "post_id" => result["post_id"],
-        "posts" => []
+        "posts" => [],
+        "comments" => []
+        }
+        users.push(new_user)
+        last_user_id = result["id"]
+      end
+      if result["comment_id"]
+        users.last["comments"].push({
+          "id" => result["comment_id"].to_i,
+          "comment_content" => result["comment_content"],
+          "user_name" => result["user_name"],
+          "image" => result["image"]
         })
-        last_id = result["id"]
       end
       if result["post_id"]
         users.last["posts"].push({
           "id" => result["post_id"].to_i,
           "post_content" => result["post_content"],
           "image" => result["image"],
-          "user_id" => result["user_id"].to_i
+          "user_name" => result["user_name"]
           })
       end
     end
     return users
   end
-
   def self.find(id)
     results = DB.exec(
         <<-SQL
           SELECT users.*,
-          posts.id as postid,
-          posts.post_content,
-          posts.user_id
+          posts.id as post_id,
+          posts.post_content as post_content,
+          posts.image as post_image,
+          posts.user_id as post_user_id,
+          comments.id as comment_id,
+          comments.comment_content as comment_content,
+          comments.image as comment_image,
+          comments.user_id as comment_user_id,
+          comments.post_id as comment_post_id
           FROM users
           LEFT JOIN posts
-          ON users.id = posts.user_id
+            ON users.id = posts.user_id
+          LEFT JOIN comments
+            ON users.id = comments.user_id
           WHERE users.id =#{id};
         SQL
     )
     posts = []
     results.each do |result|
-      if result["postid"]
+      if result["post_id"]
         posts.push({
-          "id" => result["id"].to_i,
+          "id" => result["post_id"].to_i,
           "post_content" => result["post_content"],
-          "post id" => result["postid"].to_i,
+          "image" => result["post_image"],
+          "user_name" => result["user_name"]
           })
-        end
       end
+    end
+    comments = []
+    results.each do |result|
+      if result["comment_id"]
+        comments.push({
+          "id" => result["comment_id"].to_i,
+          "comment_content" => result["comment_content"],
+          "image" => result["comment_image"],
+          "user_name" => result["user_name"]
+          })
+      end
+    end
     return {
         "id" => results.first["id"].to_i,
         "user_name" => results.first["user_name"],
         "password" => results.first["password"],
         "avatar" => results.first["avatar"],
-        "posts" => posts
+        "post_id" => results.first["post_id"],
+        "posts" => posts,
+        "comments" => comments
     }
   end
-
   def self.create(opts)
     results = DB.exec(
         <<-SQL
@@ -88,7 +122,6 @@ class User
         "post_id" => results.first["post_id"]
     }
   end
-
   def self.delete(id)
     results = DB.exec("DELETE FROM users WHERE id=#{id};")
     return {"deleted" => true}
