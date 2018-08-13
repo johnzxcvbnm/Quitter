@@ -21,7 +21,11 @@ class App extends React.Component {
       //Used for user show pages
       selectedUser: null,
       //A list of posts
-      posts: []
+      posts: [],
+      //The currently selected post, pulled from the database
+      selectedPost: {},
+      selectedPostIndex: 0
+
     } //End of this.state
     //Function Bindings
     this.changePage = this.changePage.bind(this);
@@ -34,6 +38,7 @@ class App extends React.Component {
     this.loadPosts = this.loadPosts.bind(this);
     this.createPost = this.createPost.bind(this);
     this.deletePost = this.deletePost.bind(this);
+    this.selectPost = this.selectPost.bind(this);
   }//End of Constructor
 
   //Function used to load things on page load
@@ -209,9 +214,10 @@ class App extends React.Component {
   //Function removes a post from the database
     //Function first removes the post from the database then updates the
     //current state.  If there are no more posts in the state then load the default post
+    //Function then redirects the user to the main page (postList)
     deletePost(old_post, index){
-      // console.log("DELETING");
-      // console.log(old_post);
+      console.log("DELETING");
+      console.log(old_post);
       fetch("/posts/" + old_post.id, {
         method: "DELETE"
       })
@@ -225,7 +231,22 @@ class App extends React.Component {
         if(this.state.posts.length == 0){
           this.loadDefaultPost();
         }
+        this.changePage("postList");
       }).catch(error => console.log(error))
+    }
+
+    selectPost(post, index) {
+      // console.log("Selected Post");
+      // console.log(post);
+      if(post.id != 0){
+        fetch("/posts/" + post.id)
+          .then(response => response.json())
+            .then(my_post => {
+              this.setState({selectedPost: my_post,
+                             selectedPostIndex: index});
+              this.changePage("postShow");
+            }).catch(error => console.log(error));
+      }
     }
 
   //Render to the browser
@@ -245,7 +266,8 @@ class App extends React.Component {
             <span>
               <PostList
                 posts={this.state.posts}
-                loggedUser={ {id: 0} }/>
+                loggedUser={ {id: 0} }
+                selectPost={this.selectPost}/>
             </span>
           : ''
         }
@@ -260,7 +282,8 @@ class App extends React.Component {
                 posts={this.state.posts}
                 loggedUser={this.state.loggedUser}
                 changePage={this.changePage}
-                deletePost={this.deletePost}/>
+                deletePost={this.deletePost}
+                selectPost={this.selectPost}/>
             </span>
           : ''
         }
@@ -306,6 +329,27 @@ class App extends React.Component {
               changePage={this.changePage}
               loggedUser={this.state.loggedUser}
               functionExecute={this.createPost}/>
+          : ''
+        }
+        {/* Show post page */}
+        {
+          this.state.page.postShow && this.state.loggedUser ?
+            <PostShow
+              loggedUser={this.state.loggedUser}
+              changePage={this.changePage}
+              post={this.state.selectedPost}
+              postIndex={this.state.selectedPostIndex}
+              deletePost={this.deletePost}/>
+          : ''
+        }
+        {
+          this.state.page.postShow && !(this.state.loggedUser) ?
+            <PostShow
+              loggedUser={ {id: 0} }
+              changePage={this.changePage}
+              post={this.state.selectedPost}
+              postIndex={this.state.selectedPostIndex}
+              deletePost={this.deletePost}/>
           : ''
         }
         <Footer/>

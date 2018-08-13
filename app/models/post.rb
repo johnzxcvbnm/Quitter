@@ -36,7 +36,11 @@ class Post
   def self.find(id)
     results = DB.exec(
       <<-SQL
-        SELECT *
+        SELECT
+          posts.*,
+          users.id AS user_id,
+          users.user_name,
+          users.avatar
         FROM posts
         JOIN users
           ON posts.user_id = users.id
