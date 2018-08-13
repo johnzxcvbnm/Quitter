@@ -236,15 +236,17 @@ class App extends React.Component {
     }
 
     selectPost(post, index) {
-      console.log("Selected Post");
-      console.log(post);
-      fetch("/posts/" + post.id)
-        .then(response => response.json())
-          .then(my_post => {
-            this.setState({selectedPost: my_post,
-                           selectedPostIndex: index});
-            this.changePage("postShow");
-          }).catch(error => console.log(error));
+      // console.log("Selected Post");
+      // console.log(post);
+      if(post.id != 0){
+        fetch("/posts/" + post.id)
+          .then(response => response.json())
+            .then(my_post => {
+              this.setState({selectedPost: my_post,
+                             selectedPostIndex: index});
+              this.changePage("postShow");
+            }).catch(error => console.log(error));
+      }
     }
 
   //Render to the browser

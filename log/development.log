@@ -2403,3 +2403,24 @@ Processing by PostsController#index as */*
 Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms)
 
 
+Started GET "/posts" for 127.0.0.1 at 2018-08-13 11:04:47 -0500
+Processing by PostsController#index as */*
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/posts/0" for 127.0.0.1 at 2018-08-13 11:04:49 -0500
+Processing by PostsController#show as */*
+  Parameters: {"id"=>"0"}
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 0.0ms)
+
+
+  
+NoMethodError (undefined method `[]' for nil:NilClass):
+  
+app/models/post.rb:51:in `find'
+app/controllers/posts_controller.rb:11:in `show'
+Started GET "/posts" for 127.0.0.1 at 2018-08-13 11:05:16 -0500
+Processing by PostsController#index as */*
+Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+
+
