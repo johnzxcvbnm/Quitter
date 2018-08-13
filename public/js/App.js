@@ -107,7 +107,12 @@ class App extends React.Component {
   }
 
   //Function calls the server to login user
-  //Currently the server automatically logs the user in as the first user ID until further updated
+  //Function first sets the login error messages to false to prevent them from showing up
+  //Then the function looks for the user_name in the database
+  //If the username is found it checks the password in the database against the submitted password
+  //If the passwords match, log in that user
+  //If the passwords do NOT match, set the corresponding error message to true and do nothing else
+  //If the user_name is NOT found, set the corresponding error message to true and do nothing else
   loginUser(new_user){
     // console.log("Logging In User");
     // console.log(new_user);
