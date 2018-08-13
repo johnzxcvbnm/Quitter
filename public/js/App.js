@@ -16,6 +16,10 @@ class App extends React.Component {
         postEdit: false
 
       }, //End of this.state.page
+      //Login Error - No user found
+      errorNoUser: false,
+      //Login Error - Password submitted does not match stored password
+      errorWrongPassword: false,
       //The current logged in user, if there is one
       loggedUser: null,
       //Used for user show pages
@@ -105,14 +109,24 @@ class App extends React.Component {
   //Function calls the server to login user
   //Currently the server automatically logs the user in as the first user ID until further updated
   loginUser(new_user){
-    console.log("Logging In User");
-    console.log(new_user);
-    fetch("/users/1")
+    // console.log("Logging In User");
+    // console.log(new_user);
+    this.setState({ errorNoUser: false,
+                    errorWrongPassword: false});
+    fetch("/users/find/'" + new_user.user_name + "'")
       .then(response => response.json())
         .then(logged_user => {
-          this.setUser(logged_user);
-          this.changePage("postList");
-        }).catch(error => console.log(error));
+          if(new_user.password === logged_user.password){
+            this.setUser(logged_user);
+            this.changePage("postList");
+          } else {
+            this.setState({ errorWrongPassword: true });
+            console.log("Wrong Password");
+          }
+        }).catch(error => {
+            console.log(error);
+            this.setState({ errorNoUser: true });
+        });
   }
 
   //Function changes the selected user.
