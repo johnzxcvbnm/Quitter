@@ -65,18 +65,7 @@ img {
   width: 80%;
 }
 
-.user_show {
-  background-color: #05386B;
-  padding: 20px;
-  border-radius: 20px;
-  border: 2px solid #EDF5E1;
-  color: #EDF5E1;
-  margin-bottom: 500px;
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+
 .field label {
   color: #EDF5E1;
 }
@@ -117,7 +106,7 @@ span {
   border-radius: 20px;
   border: 2px solid #EDF5E1;
   width: 80%;
-  margin: 0 auto;O0
+  margin: 0 auto;
 }
 
 .content {
@@ -212,6 +201,49 @@ span {
   align-items: center;
 }
 
-.user_show h1 {
-  font-size: 24px;
+
+.user_post {
+    color: #05386B;
+    background-color: #8EE4AF;
+  }
+
+  .user_show div {
+    margin: 0 auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+
+
+
+.user_show {
+  background-color: #05386B;
+  width: 100%;
+  padding: 20px;
+  border-radius: 20px;
+  border: 2px solid #EDF5E1;
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user_show .content {
+  width: 80%;
+}
+
+.user_show p {
+  font-size: 25px;
+}
+
+
+.user_welcome {
+  font-size: 40px;
+  margin: 0 auto;
+}
+
+.user_pic {
+  width: 500px;
+  height: auto;
 }
