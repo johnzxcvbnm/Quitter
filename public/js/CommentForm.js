@@ -31,15 +31,17 @@ class CommentForm extends React.Component {
     }
 
     //If this is a comment EDIT then add the passed in comment ID
+    //And execute the PUT function for comments
     if(this.props.comment){
       new_comment["id"] = this.props.comment.id;
+      this.props.closeComments();
+      this.props.functionExecute2(new_comment);
+    } else {
+      //If this is a new comment
+      //Execute the POST function for comments
+      this.props.closeComments();
+      this.props.functionExecute(new_comment);
     }
-
-    //Close the comment form box after submition
-    this.props.closeComments();
-
-    //Update the database and the post state with the new comment
-    this.props.functionExecute(new_comment);
   }
 
   render() {
@@ -57,7 +59,8 @@ class CommentForm extends React.Component {
           </div>
           <div className="submit">
             <div className="control">
-              <input id="submit" className="button is-primary" type="submit" />
+              <input id="submit" className="button is-info" type="submit" />
+              <button className="button is-info" onClick={this.props.closeComments}>Cancel</button>
             </div>
           </div>
         </form>

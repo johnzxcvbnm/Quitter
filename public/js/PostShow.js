@@ -4,15 +4,26 @@ class PostShow extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      commentField: false
+      commentField: false,
+      selectedComment: null
     }
     this.toggleComments = this.toggleComments.bind(this);
+    this.selectComment = this.selectComment.bind(this);
   }
 
+  // Function jumps the user to the top of the page (where the post is)
   componentDidMount(){
     window.scrollTo(0, 0);
   }
 
+  //Function updates the current state with the selected comment
+  //Function is used for comment updates
+  selectComment(comment){
+    this.setState({ selectedComment: comment });
+    this.toggleComments();
+  }
+
+  //Hide or Show the CommentForm
   toggleComments(){
     this.setState({ commentField: !this.state.commentField });
   }
@@ -48,29 +59,26 @@ class PostShow extends React.Component {
               </span>
             : ''
           }
+          {/* If the user is logged in, allow them to like/comment the post */}
           {
             this.props.loggedUser.id != 0 && this.props.post.user_id != -1 ?
               <div className="buttons">
                 <button className="button is-link" onClick={this.props.addLike}>Like</button>
-                <button className="button is-link" onClick={this.toggleComments}>Comment</button>
+                <button className="button is-link" onClick={() => { this.selectComment(null);  this.toggleComments();}}>Comment</button>
               </div>
             : ''
           }
-          <div className="post_comment_container">
-          {this.props.post.comments.map((comment, index) => {
-            return(
-              <div><div className="post_comment">
-              <p>{comment.comment_content}</p>
-              </div>
-              <div className="comment_avatar">
-              <img src={comment.avatar}/>
-              <h3>{comment.username}</h3>
-              </div>
-              <br/>
-              </div>
-          )}
-        )}
-        </div>
+          {/* If the CommentField is hidden (default) then show the list of comments */}
+          {
+            !this.state.commentField ?
+              <CommentList
+                post={this.props.post}
+                loggedUser={this.props.loggedUser}
+                deleteComment={this.props.deleteComment}
+                selectComment={this.selectComment}/>
+            : ''
+          }
+          {/* When commentField is true, display the CommentForm (used for comment edit/create) */}
           {/* Comment Field to allow a users to add comments to the post */}
           {
             this.state.commentField ?
@@ -78,10 +86,11 @@ class PostShow extends React.Component {
                 post={this.props.post}
                 loggedUser={this.props.loggedUser}
                 functionExecute={this.props.commentFunctionExecute}
-                closeComments={this.toggleComments}/>
+                functionExecute2={this.props.updateComment}
+                closeComments={this.toggleComments}
+                comment={this.state.selectedComment}/>
             : ''
           }
-          <hr />
         </div>
       </div>
     )
