@@ -45,6 +45,7 @@ class App extends React.Component {
     this.selectPost = this.selectPost.bind(this);
     this.editPost = this.editPost.bind(this);
     this.createComment = this.createComment.bind(this);
+    this.deleteComment = this.deleteComment.bind(this);
     this.addLike = this.addLike.bind(this);
   }//End of Constructor
 
@@ -327,6 +328,19 @@ class App extends React.Component {
     .catch(error => console.log(error))
   }
 
+
+  deleteComment(old_comment){
+    // console.log("DELETING");
+    // console.log(old_comment);
+    fetch("/comments/" + old_comment.id, {
+      method: "DELETE"
+    })
+    .then(data => {
+      this.selectPost(this.state.selectedPost, this.state.selectedPostIndex);
+    })
+    .catch(error => console.log(error))
+  }
+
   //Function adds likes to posts made by users
   //Function creates a new like from the loggedUser and selectedPost
   //then updates the database with the new like
@@ -472,7 +486,8 @@ class App extends React.Component {
               postIndex={this.state.selectedPostIndex}
               deletePost={this.deletePost}
               commentFunctionExecute={this.createComment}
-              addLike={this.addLike}/>
+              addLike={this.addLike}
+              deleteComment={this.deleteComment}/>
           : ''
         }
         {/* Show Post page with guests */}
