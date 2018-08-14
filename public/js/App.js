@@ -45,6 +45,7 @@ class App extends React.Component {
     this.selectPost = this.selectPost.bind(this);
     this.editPost = this.editPost.bind(this);
     this.createComment = this.createComment.bind(this);
+    this.addLike = this.addLike.bind(this);
   }//End of Constructor
 
   //Function used to load things on page load
@@ -303,8 +304,8 @@ class App extends React.Component {
   }
 
   createComment(new_comment){
-    console.log("Creating new comment");
-    console.log(new_comment);
+    // console.log("Creating new comment");
+    // console.log(new_comment);
     fetch("/comments", {
       body: JSON.stringify(new_comment),
       method: "POST",
@@ -317,9 +318,31 @@ class App extends React.Component {
       return createdComment.json()
     })
     .then(jsonedComment => {
-      console.log("Comment Added");
+      // console.log("Comment Added");
+      this.selectPost(this.state.selectedPost, this.state.selectedPostIndex);
     })
     .catch(error => console.log(error))
+  }
+
+  addLike(){
+    // console.log("Like Added!");
+    const new_like = {
+      user_id: this.state.loggedUser.id,
+      post_id: this.state.selectedPost.id
+    }
+
+    fetch("/likes", {
+      body: JSON.stringify(new_like),
+      method: "POST",
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(createdLike => {
+      this.selectPost(this.state.selectedPost, this.state.selectedPostIndex);
+    })
+    .catch(error => console.log(error));
   }
 
   //Render to the browser
@@ -417,7 +440,7 @@ class App extends React.Component {
               post={this.state.selectedPost}/>
           : ''
         }
-        {/* Show post page */}
+        {/* Show post page with logged in users */}
         {
           this.state.page.postShow && this.state.loggedUser ?
             <PostShow
@@ -426,9 +449,11 @@ class App extends React.Component {
               post={this.state.selectedPost}
               postIndex={this.state.selectedPostIndex}
               deletePost={this.deletePost}
-              commentFunctionExecute={this.createComment}/>
+              commentFunctionExecute={this.createComment}
+              addLike={this.addLike}/>
           : ''
         }
+        {/* Show Post page with guests */}
         {
           this.state.page.postShow && !(this.state.loggedUser) ?
             <PostShow

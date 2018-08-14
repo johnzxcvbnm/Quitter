@@ -45,7 +45,7 @@ class PostShow extends React.Component {
           {
             this.props.loggedUser.id != 0 && this.props.post.user_id != -1 ?
               <div className="buttons">
-                <button className="button is-link">Like</button>
+                <button className="button is-link" onClick={this.props.addLike}>Like</button>
                 <button className="button is-link" onClick={this.toggleComments}>Comment</button>
               </div>
             : ''
