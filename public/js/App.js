@@ -46,6 +46,7 @@ class App extends React.Component {
     this.editPost = this.editPost.bind(this);
     this.createComment = this.createComment.bind(this);
     this.deleteComment = this.deleteComment.bind(this);
+    this.updateComment = this.updateComment.bind(this);
     this.addLike = this.addLike.bind(this);
   }//End of Constructor
 
@@ -341,6 +342,23 @@ class App extends React.Component {
     .catch(error => console.log(error))
   }
 
+  updateComment(new_comment){
+    console.log("Updating Comment");
+    console.log(new_comment);
+    fetch("/comments/" + new_comment.id, {
+      body: JSON.stringify(new_comment),
+      method: "PUT",
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(updatedComment => {
+      this.selectPost(this.state.selectedPost, this.state.selectedPostIndex);
+    })
+    .catch(error => console.log(error));
+  }
+
   //Function adds likes to posts made by users
   //Function creates a new like from the loggedUser and selectedPost
   //then updates the database with the new like
@@ -487,7 +505,8 @@ class App extends React.Component {
               deletePost={this.deletePost}
               commentFunctionExecute={this.createComment}
               addLike={this.addLike}
-              deleteComment={this.deleteComment}/>
+              deleteComment={this.deleteComment}
+              updateComment={this.updateComment}/>
           : ''
         }
         {/* Show Post page with guests */}

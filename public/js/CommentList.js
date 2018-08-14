@@ -11,8 +11,8 @@ class CommentList extends React.Component {
                 {
                   this.props.loggedUser.user_name == comment.username ?
                     <div className="buttons">
-                      <button className="button is-warning">Edit</button>
-                      <button className="button is-danger" onClick={() => this.props.deleteComment(comment)}>Delete</button>
+                      <button className="button is-warning" onClick={() => { this.props.selectComment(comment);}}>Edit Comment</button>
+                      <button className="button is-danger" onClick={() => this.props.deleteComment(comment)}>Delete Comment</button>
                     </div>
                   : ''
                 }

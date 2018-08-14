@@ -4,13 +4,20 @@ class PostShow extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      commentField: false
+      commentField: false,
+      selectedComment: null
     }
     this.toggleComments = this.toggleComments.bind(this);
+    this.selectComment = this.selectComment.bind(this);
   }
 
   componentDidMount(){
     window.scrollTo(0, 0);
+  }
+
+  selectComment(comment){
+    this.setState({ selectedComment: comment });
+    this.toggleComments();
   }
 
   toggleComments(){
@@ -52,7 +59,7 @@ class PostShow extends React.Component {
             this.props.loggedUser.id != 0 && this.props.post.user_id != -1 ?
               <div className="buttons">
                 <button className="button is-link" onClick={this.props.addLike}>Like</button>
-                <button className="button is-link" onClick={this.toggleComments}>Comment</button>
+                <button className="button is-link" onClick={() => { this.selectComment(null);  this.toggleComments();}}>Comment</button>
               </div>
             : ''
           }
@@ -61,7 +68,8 @@ class PostShow extends React.Component {
               <CommentList
                 post={this.props.post}
                 loggedUser={this.props.loggedUser}
-                deleteComment={this.props.deleteComment}/>
+                deleteComment={this.props.deleteComment}
+                selectComment={this.selectComment}/>
             : ''
           }
           {/* Comment Field to allow a users to add comments to the post */}
@@ -71,7 +79,9 @@ class PostShow extends React.Component {
                 post={this.props.post}
                 loggedUser={this.props.loggedUser}
                 functionExecute={this.props.commentFunctionExecute}
-                closeComments={this.toggleComments}/>
+                functionExecute2={this.props.updateComment}
+                closeComments={this.toggleComments}
+                comment={this.state.selectedComment}/>
             : ''
           }
           <hr />

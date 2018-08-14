@@ -33,13 +33,12 @@ class CommentForm extends React.Component {
     //If this is a comment EDIT then add the passed in comment ID
     if(this.props.comment){
       new_comment["id"] = this.props.comment.id;
+      this.props.closeComments();
+      this.props.functionExecute2(new_comment);
+    } else {
+      this.props.closeComments();
+      this.props.functionExecute(new_comment);
     }
-
-    //Close the comment form box after submition
-    this.props.closeComments();
-
-    //Update the database and the post state with the new comment
-    this.props.functionExecute(new_comment);
   }
 
   render() {
