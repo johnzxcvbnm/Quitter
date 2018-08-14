@@ -14,16 +14,18 @@ class PostShow extends React.Component {
   }
 
   render() {
+    console.log(this.props.post)
     return (
       <div className="post">
         <div className="one_post">
-          <div className="user">
-            <div className="avatar"><img src={this.props.post.avatar}/></div>
-            <h3>{this.props.post.user_name}</h3>
-          </div>
           <div className="content">
             <h3><b>Content: </b>{this.props.post.post_content}</h3>
             <h3 ><b>Post Image: </b><img src={this.props.post.image}/></h3>
+            <h2>{this.props.post.likes_amount} Likes</h2>
+          </div>
+          <div className="user">
+            <div className="avatar"><img src={this.props.post.avatar}/></div>
+            <h3>{this.props.post.user_name}</h3>
           </div>
           {/* If the user created this post, then allow them to edit it */}
           {
@@ -50,6 +52,21 @@ class PostShow extends React.Component {
               </div>
             : ''
           }
+          <div className="post_comment_container">
+          {this.props.post.comments.map((comment, index) => {
+            return(
+              <div><div className="post_comment">
+              <p>{comment.comment_content}</p>
+              </div>
+              <div className="comment_avatar">
+              <img src={comment.avatar}/>
+              <h3>{comment.username}</h3>
+              </div>
+              <br/>
+              </div>
+          )}
+        )}
+        </div>
           {/* Comment Field to allow a users to add comments to the post */}
           {
             this.state.commentField ?
