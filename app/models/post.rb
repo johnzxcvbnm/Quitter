@@ -66,6 +66,7 @@ class Post
       likes = []
       new_like = ({
         "id" => result["like_id"].to_i,
+        "user_id" => result["likes_user_id"].to_i
         })
         posts.last["likes"].push(new_like)
         last_like_id = result["like_id"]
@@ -87,20 +88,67 @@ end
           posts.*,
           users.id AS user_id,
           users.user_name,
-          users.avatar
+          users.avatar,
+          comments.id AS comments_id,
+          comments.comment_content,
+          comments.image AS comment_image,
+          likes.id AS like_id,
+          comment_users.user_name AS comment_user_name,
+          comment_users.avatar AS comment_avatar,
+          likes.user_id AS likes_user_id,
+          likes.post_id AS likes_post_id
         FROM posts
-        JOIN users
+        LEFT JOIN users
           ON posts.user_id = users.id
+        LEFT JOIN comments
+          ON posts.id = comments.post_id
+        LEFT JOIN users AS comment_users
+          ON comments.user_id = comment_users.id
+        LEFT JOIN likes
+          ON posts.id = likes.post_id
         WHERE posts.id = #{id};
       SQL
-    ).first
+    )
+    last_comment_id = nil
+    comments = []
+    likes = []
+    results.each do |result|
+      if result["comments_id"]
+        if result["comments_id"] != last_comment_id
+        comments.push({
+          "id" => result["comments_id"].to_i,
+          "comment_content" => result["comment_content"],
+          "image" => result["comment_image"],
+          "username" => result["comment_user_name"],
+          "avatar" => result["comment_avatar"]
+          })
+          last_comment_id = result["comments_id"]
+        end
+      end
+      last_like_id = nil
+      if result["like_id"]
+      if result["like_id"] != last_like_id
+        new_like = ({
+          "id" => result["like_id"].to_i,
+          "user_id" => result["likes_user_id"].to_i
+          })
+          likes.push(new_like)
+          last_like_id = result["like_id"]
+      end
+      end
+    end
+      comments = comments.uniq
+      likes = likes.uniq
     return {
-      "id" => results["id"].to_i,
-      "post_content" => results["post_content"],
-      "image" => results["image"],
-      "user_id" => results["user_id"].to_i,
-      "user_name" => results["user_name"],
-      "avatar" => results["avatar"]
+      "id" => results.first["id"].to_i,
+      "post_content" => results.first["post_content"],
+      "image" => results.first["image"],
+      "user_id" => results.first["user_id"].to_i,
+      "user_name" => results.first["user_name"],
+      "avatar" => results.first["avatar"],
+      "comments" => comments,
+      "likes" => likes,
+      "likes_amount" => likes.length
     }
   end
 
