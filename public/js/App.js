@@ -305,6 +305,21 @@ class App extends React.Component {
   createComment(new_comment){
     console.log("Creating new comment");
     console.log(new_comment);
+    fetch("/comments", {
+      body: JSON.stringify(new_comment),
+      method: "POST",
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(createdComment => {
+      return createdComment.json()
+    })
+    .then(jsonedComment => {
+      console.log("Comment Added");
+    })
+    .catch(error => console.log(error))
   }
 
   //Render to the browser
