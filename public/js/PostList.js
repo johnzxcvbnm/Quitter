@@ -18,6 +18,10 @@ class PostList extends React.Component {
         {this.props.posts.map((post, index) => {
           return (
             <div className="one_post">
+              <div className="user">
+                <div className="avatar"><img src={post.avatar}/></div>
+                <h3>{post.user_name}</h3>
+              </div>
               <div
                 className="content"
                 onClick={() => {
@@ -34,14 +38,14 @@ class PostList extends React.Component {
                   </div>
                 : ''
               }
-              <div className="user">
-                <div className="avatar"><img src={post.avatar}/></div>
-                <h3>{post.user_name}</h3>
-              </div>
               {/* Comment Field to allow a users to add comments to the post */}
               {
                 this.state.commentField ?
-                  <CommentForm />
+                  <CommentForm
+                    post={post}
+                    loggedUser={this.props.loggedUser}
+                    functionExecute={this.props.commentFunctionExecute}
+                    closeComments={this.toggleComments}/>
                 : ''
               }
               <hr />
