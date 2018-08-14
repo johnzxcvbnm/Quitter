@@ -56,10 +56,14 @@ class PostShow extends React.Component {
               </div>
             : ''
           }
-          <CommentList
-            post={this.props.post}
-            loggedUser={this.props.loggedUser}
-            deleteComment={this.props.deleteComment}/>
+          {
+            !this.state.commentField ?
+              <CommentList
+                post={this.props.post}
+                loggedUser={this.props.loggedUser}
+                deleteComment={this.props.deleteComment}/>
+            : ''
+          }
           {/* Comment Field to allow a users to add comments to the post */}
           {
             this.state.commentField ?
