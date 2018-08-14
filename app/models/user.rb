@@ -1,45 +1,6 @@
 class User
   DB = PG.connect({ :host => "localhost", :port => 5432, :dbname => 'quitter_app_development'})
   def self.all
-<<<<<<< HEAD
-    results = DB.exec(
-        <<-SQL
-          SELECT
-           users.*,
-           posts.id AS post_id,
-           posts.post_content,
-           posts.user_id,
-           comments.id AS comment_id,
-           comments.comment_content,
-           comments.image
-          FROM users
-          LEFT JOIN posts
-            ON posts.user_id = users.id
-          LEFT JOIN comments
-            ON users.id = comments.user_id
-          ORDER BY users.id ASC;
-        SQL
-    )
-    users = []
-    last_user_id = nil
-    results.each do |result|
-      if result["id"] != last_user_id
-      new_user = {
-        "id" => result["id"].to_i,
-        "user_name" => result["user_name"],
-        "password" => result["password"],
-        "avatar" => result["avatar"],
-        "posts" => [],
-        "comments" => []
-        }
-        users.push(new_user)
-        last_user_id = result["id"]
-      end
-      if result["comment_id"]
-        users.last["comments"].push({
-          "id" => result["comment_id"].to_i,
-          "comment_content" => result["comment_content"],
-=======
       results = DB.exec(
           <<-SQL
             SELECT users.*,
@@ -66,7 +27,6 @@ class User
         if result["id"] != last_user_id
         new_user = {
           "id" => result["id"].to_i,
->>>>>>> fafee03a00602095dbcac8e1c65e8af8b024161b
           "user_name" => result["user_name"],
           "password" => result["password"],
           "avatar" => result["avatar"],
