@@ -57,8 +57,8 @@ class CommentForm extends React.Component {
           </div>
           <div className="submit">
             <div className="control">
-              <input id="submit" className="button is-primary" type="submit" />
-              <button className="button is-primary" onClick={this.props.closeComments}>Cancel</button>
+              <input id="submit" className="button is-info" type="submit" />
+              <button className="button is-info" onClick={this.props.closeComments}>Cancel</button>
             </div>
           </div>
         </form>
