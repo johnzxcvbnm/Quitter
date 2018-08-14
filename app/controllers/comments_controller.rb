@@ -18,6 +18,6 @@ class CommentsController < ApplicationController
 
 
     def update
-      render json: Comment.delete(paramas["id"], params["comment"])
+      render json: Comment.update(params["id"], params["comment"])
     end
   end
