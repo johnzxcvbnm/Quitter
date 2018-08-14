@@ -1,17 +1,5 @@
 //Class PostList is used to display all the posts on the main section of the website
 class PostList extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      commentField: false
-    }
-    this.toggleComments = this.toggleComments.bind(this);
-  }
-
-  toggleComments(){
-    this.setState({ commentField: !this.state.commentField });
-  }
-
   render() {
     return (
       <div className="post">
@@ -29,25 +17,6 @@ class PostList extends React.Component {
                 <h3><b>Content: </b>{post.post_content}</h3>
                 <h3 ><b>Post Image: </b><img src={post.image}/></h3>
               </div>
-              {/* If the user is logged in and the post is not the default post enable like and comment buttons*/}
-              {
-                this.props.loggedUser.id != 0 && post.user_id != -1 ?
-                  <div className="buttons">
-                    <button className="button is-link">Like</button>
-                    <button className="button is-link" onClick={this.toggleComments}>Comment</button>
-                  </div>
-                : ''
-              }
-              {/* Comment Field to allow a users to add comments to the post */}
-              {
-                this.state.commentField ?
-                  <CommentForm
-                    post={post}
-                    loggedUser={this.props.loggedUser}
-                    functionExecute={this.props.commentFunctionExecute}
-                    closeComments={this.toggleComments}/>
-                : ''
-              }
               <hr />
             </div>
           )
