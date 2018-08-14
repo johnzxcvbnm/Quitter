@@ -117,6 +117,7 @@ class User
           comments.push({
             "id" => result["comment_id"].to_i,
             "comment_content" => result["comment_content"],
+            "post id" => result["comment_post_id"].to_i,
             "image" => result["comment_image"],
             "user_name" => result["user_name"]
             })
@@ -124,6 +125,8 @@ class User
         last_comment_id = result["comment_id"]
         end
       end
+      comments = comments.uniq
+      posts = posts.uniq
       return {
           "id" => results.first["id"].to_i,
           "user_name" => results.first["user_name"],
