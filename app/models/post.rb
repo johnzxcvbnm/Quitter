@@ -17,14 +17,19 @@ class Post
           comments.id AS id_comment,
           comments.comment_content,
           comments.user_id,
+          comments.image AS comment_image,
           likes.id AS like_id,
           likes.post_id AS likes_post_id,
-          likes.user_id AS likes_user_id
+          likes.user_id AS likes_user_id,
+          comments_users.user_name AS comments_user_name,
+          comments_users.avatar AS comments_avatar
         FROM posts
         JOIN users
           ON posts.user_id = users.id
         LEFT JOIN comments
           ON posts.id = comments.post_id
+        LEFT JOIN users AS comments_users
+          ON comments.user_id = comments_users.id
         LEFT JOIN likes
           ON posts.id = likes.post_id
         ORDER BY posts.id DESC;
@@ -55,7 +60,8 @@ class Post
       new_comment = ({
         "id" => result["id_comment"].to_i,
         "comment_content" => result["comment_content"],
-        "user_name" => result["user_name"],
+        "user_name" => result["comments_user_name"],
+        "avatar" => result["comments_avatar"],
         "image" => result["comment_image"]
         })
         posts.last["comments"].push(new_comment)
