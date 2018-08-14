@@ -48,6 +48,7 @@ class App extends React.Component {
     this.deleteComment = this.deleteComment.bind(this);
     this.updateComment = this.updateComment.bind(this);
     this.addLike = this.addLike.bind(this);
+    this.removeLike = this.removeLike.bind(this);
   }//End of Constructor
 
   //Function used to load things on page load
@@ -509,7 +510,8 @@ class App extends React.Component {
               commentFunctionExecute={this.createComment}
               addLike={this.addLike}
               deleteComment={this.deleteComment}
-              updateComment={this.updateComment}/>
+              updateComment={this.updateComment}
+              removeLike={this.removeLike}/>
           : ''
         }
         {/* Show Post page with guests */}
