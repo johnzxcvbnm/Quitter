@@ -16,7 +16,7 @@ class User
             ON posts.user_id = users.id
           LEFT JOIN comments
             ON users.id = comments.user_id
-          ORDER BY users.id;
+          ORDER BY users.id ASC;
         SQL
     )
     users = []

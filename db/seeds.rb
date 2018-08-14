@@ -23,7 +23,7 @@
 #   )
 # end
 
-#
+
 # 10.times do
 #   Post.create(
 #     "post_content" => "#{Faker::Community.quotes}",
@@ -32,11 +32,11 @@
 #   )
 # end
 
-5.times do
-  Comment.create(
-    "comment_content" => "#{Faker::Community.quotes}",
-    "image" => "#{Faker::Avatar.image}",
-    "user_id" => "#{Faker::Number.digit}",
-    "post_id" => "#{Faker::Number.digit}"
-  )
-end
+# 5.times do
+#   Comment.create(
+#     "comment_content" => "#{Faker::Community.quotes}",
+#     "image" => "#{Faker::Avatar.image}",
+#     "user_id" => "#{Faker::Number.digit}",
+#     "post_id" => "#{Faker::Number.digit}"
+#   )
+# end
