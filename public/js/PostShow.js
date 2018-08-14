@@ -56,31 +56,10 @@ class PostShow extends React.Component {
               </div>
             : ''
           }
-          <div className="post_comment_container">
-          {this.props.post.comments.map((comment, index) => {
-            return(
-              <div>
-                <div className="post_comment">
-                  <p>{comment.comment_content}</p>
-                  {/* Edit and Delete */}
-                  {
-                    this.props.loggedUser.user_name == comment.username ?
-                      <div className="buttons">
-                        <button className="button is-warning">Edit</button>
-                        <button className="button is-danger" onClick={() => this.props.deleteComment(comment)}>Delete</button>
-                      </div>
-                    : ''
-                  }
-                </div>
-                <div className="comment_avatar">
-                  <img src={comment.avatar}/>
-                  <h3>{comment.username}</h3>
-                </div>
-                <br/>
-              </div>
-          )}
-        )}
-        </div>
+          <CommentList
+            post={this.props.post}
+            loggedUser={this.props.loggedUser}
+            deleteComment={this.props.deleteComment}/>
           {/* Comment Field to allow a users to add comments to the post */}
           {
             this.state.commentField ?
