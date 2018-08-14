@@ -45,6 +45,7 @@ class App extends React.Component {
     this.selectPost = this.selectPost.bind(this);
     this.editPost = this.editPost.bind(this);
     this.createComment = this.createComment.bind(this);
+    this.addLike = this.addLike.bind(this);
   }//End of Constructor
 
   //Function used to load things on page load
@@ -302,9 +303,12 @@ class App extends React.Component {
     })
   }
 
+  //Function is used to create new comments by users (users can comment on posts)
+  //Function takes the new_comment and updates it in the database
+  //The selectedPost is then updated in the state by calling the database again
   createComment(new_comment){
-    console.log("Creating new comment");
-    console.log(new_comment);
+    // console.log("Creating new comment");
+    // console.log(new_comment);
     fetch("/comments", {
       body: JSON.stringify(new_comment),
       method: "POST",
@@ -317,9 +321,50 @@ class App extends React.Component {
       return createdComment.json()
     })
     .then(jsonedComment => {
-      console.log("Comment Added");
+      // console.log("Comment Added");
+      this.selectPost(this.state.selectedPost, this.state.selectedPostIndex);
     })
     .catch(error => console.log(error))
+  }
+
+  //Function adds likes to posts made by users
+  //Function creates a new like from the loggedUser and selectedPost
+  //then updates the database with the new like
+  //Finally the post is updated in the state (by calling the database again)
+  addLike(){
+    // console.log("Like Added!");
+    const new_like = {
+      user_id: this.state.loggedUser.id,
+      post_id: this.state.selectedPost.id
+    }
+
+    fetch("/likes", {
+      body: JSON.stringify(new_like),
+      method: "POST",
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(createdLike => {
+      this.selectPost(this.state.selectedPost, this.state.selectedPostIndex);
+    })
+    .catch(error => console.log(error));
+  }
+
+  //Function is used to delete likes that the user has made
+  //Function removes the like from the database then updates the selected post
+  removeLike(old_like){
+    console.log("Removing Like");
+    console.log(old_like);
+    fetch("/likes/" + old_like.id, {
+      method: "DELETE"
+    })
+    .then(data => {
+      console.log("Like Deleted");
+      this.selectPost(this.state.selectedPost, this.state.selectedPostIndex);
+    })
+    .catch(error => console.log(error));
   }
 
   //Render to the browser
@@ -417,7 +462,7 @@ class App extends React.Component {
               post={this.state.selectedPost}/>
           : ''
         }
-        {/* Show post page */}
+        {/* Show post page with logged in users */}
         {
           this.state.page.postShow && this.state.loggedUser ?
             <PostShow
@@ -426,9 +471,11 @@ class App extends React.Component {
               post={this.state.selectedPost}
               postIndex={this.state.selectedPostIndex}
               deletePost={this.deletePost}
-              commentFunctionExecute={this.createComment}/>
+              commentFunctionExecute={this.createComment}
+              addLike={this.addLike}/>
           : ''
         }
+        {/* Show Post page with guests */}
         {
           this.state.page.postShow && !(this.state.loggedUser) ?
             <PostShow
