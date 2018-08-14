@@ -303,6 +303,9 @@ class App extends React.Component {
     })
   }
 
+  //Function is used to create new comments by users (users can comment on posts)
+  //Function takes the new_comment and updates it in the database
+  //The selectedPost is then updated in the state by calling the database again
   createComment(new_comment){
     // console.log("Creating new comment");
     // console.log(new_comment);
@@ -324,6 +327,10 @@ class App extends React.Component {
     .catch(error => console.log(error))
   }
 
+  //Function adds likes to posts made by users
+  //Function creates a new like from the loggedUser and selectedPost
+  //then updates the database with the new like
+  //Finally the post is updated in the state (by calling the database again)
   addLike(){
     // console.log("Like Added!");
     const new_like = {
@@ -340,6 +347,21 @@ class App extends React.Component {
       }
     })
     .then(createdLike => {
+      this.selectPost(this.state.selectedPost, this.state.selectedPostIndex);
+    })
+    .catch(error => console.log(error));
+  }
+
+  //Function is used to delete likes that the user has made
+  //Function removes the like from the database then updates the selected post
+  removeLike(old_like){
+    console.log("Removing Like");
+    console.log(old_like);
+    fetch("/likes/" + old_like.id, {
+      method: "DELETE"
+    })
+    .then(data => {
+      console.log("Like Deleted");
       this.selectPost(this.state.selectedPost, this.state.selectedPostIndex);
     })
     .catch(error => console.log(error));
