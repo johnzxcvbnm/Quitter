@@ -44,6 +44,7 @@ class App extends React.Component {
     this.deletePost = this.deletePost.bind(this);
     this.selectPost = this.selectPost.bind(this);
     this.editPost = this.editPost.bind(this);
+    this.createComment = this.createComment.bind(this);
   }//End of Constructor
 
   //Function used to load things on page load
@@ -301,6 +302,26 @@ class App extends React.Component {
     })
   }
 
+  createComment(new_comment){
+    console.log("Creating new comment");
+    console.log(new_comment);
+    fetch("/comments", {
+      body: JSON.stringify(new_comment),
+      method: "POST",
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(createdComment => {
+      return createdComment.json()
+    })
+    .then(jsonedComment => {
+      console.log("Comment Added");
+    })
+    .catch(error => console.log(error))
+  }
+
   //Render to the browser
   render() {
     return (
@@ -335,7 +356,8 @@ class App extends React.Component {
                 loggedUser={this.state.loggedUser}
                 changePage={this.changePage}
                 deletePost={this.deletePost}
-                selectPost={this.selectPost}/>
+                selectPost={this.selectPost}
+                commentFunctionExecute={this.createComment}/>
             </span>
           : ''
         }
@@ -362,9 +384,9 @@ class App extends React.Component {
         {
           this.state.page.userEdit ?
             <UserForm
-            functionExecute={this.editUser}
-            title="Edit User"
-            loggedUser={this.state.loggedUser}/>
+              functionExecute={this.editUser}
+              title="Edit User"
+              loggedUser={this.state.loggedUser}/>
           : ''
         }
         {/* User Show Page */}
@@ -403,7 +425,8 @@ class App extends React.Component {
               changePage={this.changePage}
               post={this.state.selectedPost}
               postIndex={this.state.selectedPostIndex}
-              deletePost={this.deletePost}/>
+              deletePost={this.deletePost}
+              commentFunctionExecute={this.createComment}/>
           : ''
         }
         {
