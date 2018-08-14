@@ -1,10 +1,26 @@
 //Class PostShow is used to display all the information from a single post provided from the parent class
 //PostShow is also where the user can EDIT or DELETE posts that they have made
 class PostShow extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      commentField: false
+    }
+    this.toggleComments = this.toggleComments.bind(this);
+  }
+
+  toggleComments(){
+    this.setState({ commentField: !this.state.commentField });
+  }
+
   render() {
     return (
       <div className="post">
         <div className="one_post">
+          <div className="user">
+            <div className="avatar"><img src={this.props.post.avatar}/></div>
+            <h3>{this.props.post.user_name}</h3>
+          </div>
           <div className="content">
             <h3><b>Content: </b>{this.props.post.post_content}</h3>
             <h3 ><b>Post Image: </b><img src={this.props.post.image}/></h3>
@@ -30,14 +46,20 @@ class PostShow extends React.Component {
             this.props.loggedUser.id != 0 && this.props.post.user_id != -1 ?
               <div className="buttons">
                 <button className="button is-link">Like</button>
-                <button className="button is-link">Comment</button>
+                <button className="button is-link" onClick={this.toggleComments}>Comment</button>
               </div>
             : ''
           }
-          <div className="user">
-            <div className="avatar"><img src={this.props.post.avatar}/></div>
-            <h3>{this.props.post.user_name}</h3>
-          </div>
+          {/* Comment Field to allow a users to add comments to the post */}
+          {
+            this.state.commentField ?
+              <CommentForm
+                post={this.props.post}
+                loggedUser={this.props.loggedUser}
+                functionExecute={this.props.commentFunctionExecute}
+                closeComments={this.toggleComments}/>
+            : ''
+          }
           <hr />
         </div>
       </div>

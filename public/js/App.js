@@ -410,7 +410,8 @@ class App extends React.Component {
               changePage={this.changePage}
               post={this.state.selectedPost}
               postIndex={this.state.selectedPostIndex}
-              deletePost={this.deletePost}/>
+              deletePost={this.deletePost}
+              commentFunctionExecute={this.createComment}/>
           : ''
         }
         {
