@@ -13,24 +13,71 @@ class Post
         SELECT
           posts.*,
           users.avatar,
-          users.user_name
+          users.user_name,
+          comments.id AS id_comment,
+          comments.comment_content,
+          comments.user_id,
+          likes.id AS like_id,
+          likes.post_id AS likes_post_id,
+          likes.user_id AS likes_user_id
         FROM posts
         JOIN users
           ON posts.user_id = users.id
+        LEFT JOIN comments
+          ON posts.id = comments.post_id
+        LEFT JOIN likes
+          ON posts.id = likes.post_id
         ORDER BY posts.id DESC;
       SQL
     )
-    return results.map do |result|
-      {
+    posts = []
+    likes = []
+    last_post_id = nil
+    results.each do |result|
+      if result["id"] != last_post_id
+      new_post = {
         "id" => result["id"].to_i,
         "post_content" => result["post_content"],
         "image" => result["image"],
         "user_id" => result["user_id"].to_i,
         "user_name" => result["user_name"],
-        "avatar" => result["avatar"]
+        "avatar" => result["avatar"],
+        "comments" => [],
+        "likes" => [],
+        "likes_amount" => nil
       }
+      posts.push(new_post)
+      last_post_id = result["id"]
+    end
+    comments = []
+    last_comment_id = nil
+    if result["id_comment"] != last_comment_id
+      new_comment = ({
+        "id" => result["id_comment"].to_i,
+        "comment_content" => result["comment_content"],
+        "user_name" => result["user_name"],
+        "image" => result["comment_image"]
+        })
+        posts.last["comments"].push(new_comment)
+        last_comment_id = result["id_comment"]
+    end
+    last_like_id = nil
+    if result["like_id"] != last_like_id
+      likes = []
+      new_like = ({
+        "id" => result["like_id"].to_i,
+        })
+        posts.last["likes"].push(new_like)
+        last_like_id = result["like_id"]
     end
   end
+  posts.each do |post|
+    post["likes"] = post["likes"].uniq
+    post["likes_amount"] = post["likes"].length
+    post["comments"] = post["comments"].uniq
+  end
+  return posts
+end
 
   # Pulls one specific Post
   def self.find(id)
