@@ -329,7 +329,8 @@ class App extends React.Component {
     .catch(error => console.log(error))
   }
 
-
+  // Function is used to delete comments from the database
+  // Function deletes the comment then updates the selected post in state by calling the database
   deleteComment(old_comment){
     // console.log("DELETING");
     // console.log(old_comment);
@@ -342,9 +343,11 @@ class App extends React.Component {
     .catch(error => console.log(error))
   }
 
+  // Function is used to update comments in the database
+  // Function calls the database with the updated post then updates the post in state by calling the database again
   updateComment(new_comment){
-    console.log("Updating Comment");
-    console.log(new_comment);
+    // console.log("Updating Comment");
+    // console.log(new_comment);
     fetch("/comments/" + new_comment.id, {
       body: JSON.stringify(new_comment),
       method: "PUT",

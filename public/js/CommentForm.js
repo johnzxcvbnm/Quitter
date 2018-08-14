@@ -31,11 +31,14 @@ class CommentForm extends React.Component {
     }
 
     //If this is a comment EDIT then add the passed in comment ID
+    //And execute the PUT function for comments
     if(this.props.comment){
       new_comment["id"] = this.props.comment.id;
       this.props.closeComments();
       this.props.functionExecute2(new_comment);
     } else {
+      //If this is a new comment
+      //Execute the POST function for comments
       this.props.closeComments();
       this.props.functionExecute(new_comment);
     }

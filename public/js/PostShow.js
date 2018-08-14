@@ -11,15 +11,19 @@ class PostShow extends React.Component {
     this.selectComment = this.selectComment.bind(this);
   }
 
+  // Function jumps the user to the top of the page (where the post is)
   componentDidMount(){
     window.scrollTo(0, 0);
   }
 
+  //Function updates the current state with the selected comment
+  //Function is used for comment updates
   selectComment(comment){
     this.setState({ selectedComment: comment });
     this.toggleComments();
   }
 
+  //Hide or Show the CommentForm
   toggleComments(){
     this.setState({ commentField: !this.state.commentField });
   }
@@ -55,6 +59,7 @@ class PostShow extends React.Component {
               </span>
             : ''
           }
+          {/* If the user is logged in, allow them to like/comment the post */}
           {
             this.props.loggedUser.id != 0 && this.props.post.user_id != -1 ?
               <div className="buttons">
@@ -63,6 +68,7 @@ class PostShow extends React.Component {
               </div>
             : ''
           }
+          {/* If the CommentField is hidden (default) then show the list of comments */}
           {
             !this.state.commentField ?
               <CommentList
@@ -72,6 +78,7 @@ class PostShow extends React.Component {
                 selectComment={this.selectComment}/>
             : ''
           }
+          {/* When commentField is true, display the CommentForm (used for comment edit/create) */}
           {/* Comment Field to allow a users to add comments to the post */}
           {
             this.state.commentField ?
@@ -84,7 +91,6 @@ class PostShow extends React.Component {
                 comment={this.state.selectedComment}/>
             : ''
           }
-          <hr />
         </div>
       </div>
     )
