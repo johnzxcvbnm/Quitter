@@ -9,12 +9,16 @@ class PostShow extends React.Component {
     this.toggleComments = this.toggleComments.bind(this);
   }
 
+  componentDidMount(){
+    window.scrollTo(0, 0);
+  }
+
   toggleComments(){
     this.setState({ commentField: !this.state.commentField });
   }
 
   render() {
-    console.log(this.props.post)
+    // console.log(this.props.post)
     return (
       <div className="post">
         <div className="one_post">
