@@ -81,6 +81,12 @@ class App extends React.Component {
   //If successful it logs the returned user into the state creating a session
   //Logged in users are then brought back to the main page (postList)
   createUser(new_user){
+    // console.log("Creating new User");
+    // console.log(new_user);
+    if(new_user.avatar === ""){
+      new_user.avatar = "https://robohash.org/quiullamet.png?size=300x300&set=set1";
+    }
+
     fetch("/users", {
       body: JSON.stringify(new_user),
       method: "POST",
@@ -93,8 +99,8 @@ class App extends React.Component {
       return createdUser.json()
     })
     .then(jsonedUser => {
-      this.setUser(jsonedUser);
-      this.changePage("postList");
+      this.loginUser(jsonedUser);
+      // this.changePage("postList");
     })
     .catch(error => console.log(error));
   }
@@ -156,6 +162,10 @@ class App extends React.Component {
   editUser(old_user){
     // console.log("Editing User");
     // console.log(old_user);
+    if(old_user.avatar === ""){
+      old_user.avatar = "https://robohash.org/quiullamet.png?size=300x300&set=set1";
+    }
+
     fetch("/users/" + old_user.id, {
       body: JSON.stringify(old_user),
       method: "PUT",
@@ -307,7 +317,8 @@ class App extends React.Component {
     .then(jsonedPost => {
       this.loadPosts();
       this.setState({ selectedPost: jsonedPost });
-      this.changePage("postShow");
+      // setTimeout(() => {this.changePage("postShow"); console.log(this.state.selectedPost);}, 5000);
+      this.changePage("postList");
     })
   }
 
@@ -424,7 +435,9 @@ class App extends React.Component {
         break;
       }
     }
-    this.selectPost(this.state.posts[index], index);
+    if(index != -1){
+      this.selectPost(this.state.posts[index], index);
+    }
   }
 
   //Render to the browser
