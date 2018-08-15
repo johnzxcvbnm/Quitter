@@ -12,6 +12,11 @@ class UserShow extends React.Component {
             : ''
           }
           <div className="user_posts">
+            {
+              this.props.selectedUser.posts.length != 0 ?
+                <h1>Posts</h1>
+              : ''
+            }
             {this.props.selectedUser.posts.map((post, index) => {
               return (
                 <div className="one_post">
@@ -25,7 +30,11 @@ class UserShow extends React.Component {
             )}
             </div>
             <div className="user_comments">
-              <h1>Comments</h1>
+              {
+                this.props.selectedUser.comments.length != 0 ?
+                  <h1>Comments</h1>
+                : ''
+              }
               {this.props.selectedUser.comments.map((comment, index) => {
                 return (
                   <div className="one_comment">
