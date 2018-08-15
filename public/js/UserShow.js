@@ -4,7 +4,12 @@ class UserShow extends React.Component {
   render() {
     return (
       <div className="user_show">
-          <h1 className="user_welcome">Welcome to Quitter, {this.props.selectedUser.user_name}</h1>
+          {
+            this.props.loggedUser == this.props.selectedUser ?
+            <h1 className="user_welcome"> Welcome to Quitter, {this.props.selectedUser.user_name}</h1>
+            :
+            <h1 className="user_welcome">{this.props.selectedUser.user_name}</h1>
+          }
           <img className="user_pic" src={this.props.selectedUser.avatar}/>
           {
             (this.props.selectedUser == this.props.loggedUser)?
