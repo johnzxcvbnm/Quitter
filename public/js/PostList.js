@@ -1,5 +1,21 @@
 //Class PostList is used to display all the posts on the main section of the website
 class PostList extends React.Component {
+  constructor(props){
+    super(props);
+    this.clickedUser = this.clickedUser.bind(this);
+  }
+
+  clickedUser(id){
+    fetch('/users/' + id)
+      .then(response => response.json())
+        .then(user => {
+          console.log(this.props)
+          this.props.changeSelectedUser(user)
+          this.props.changePage("userShow");
+        }).catch(error => console.log(error))
+  }
+
+
   render() {
     return (
       <div className="post">
@@ -7,7 +23,9 @@ class PostList extends React.Component {
           return (
             <div className="one_post">
               <div className="user">
-                <div className="avatar"><img src={post.avatar}/></div>
+                <div onClick={()=>{
+                  this.clickedUser(post.user_id)
+                }} className="avatar"><img src={post.avatar}/></div>
                 <h3>{post.user_name}</h3>
               </div>
               <div

@@ -16,7 +16,7 @@ class Post
           users.user_name,
           comments.id AS id_comment,
           comments.comment_content,
-          comments.user_id,
+          comments.user_id AS comment_user_id,
           comments.image AS comment_image,
           likes.id AS like_id,
           likes.post_id AS likes_post_id,

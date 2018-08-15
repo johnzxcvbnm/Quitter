@@ -144,6 +144,7 @@ class App extends React.Component {
   //Function changes the selected user.
   //Selected User is used to dislay user show pages
   changeSelectedUser(new_user){
+    new_user["password"] = "Nice Try";
     this.setState({selectedUser: new_user});
   }
 
@@ -430,6 +431,8 @@ class App extends React.Component {
           this.state.page.postList && !(this.state.loggedUser) ?
             <span>
               <PostList
+                changeSelectedUser={this.changeSelectedUser}
+                changePage = {this.changePage}
                 posts={this.state.posts}
                 loggedUser={ {id: 0} }
                 selectPost={this.selectPost}/>
@@ -444,6 +447,7 @@ class App extends React.Component {
                 loggedUser={this.state.loggedUser}
                 changePage={this.changePage}/>
               <PostList
+                changeSelectedUser={this.changeSelectedUser}
                 posts={this.state.posts}
                 loggedUser={this.state.loggedUser}
                 changePage={this.changePage}
