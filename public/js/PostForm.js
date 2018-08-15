@@ -59,6 +59,7 @@ class PostForm extends React.Component {
           <div className="submit">
             <div className="control">
               <input id="submit" className="button is-info" type="submit" />
+              <button className="button is-info" onClick={() => this.props.changePage("postList")}>Cancel</button>
             </div>
           </div>
         </form>
