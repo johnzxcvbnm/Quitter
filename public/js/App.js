@@ -66,6 +66,7 @@ class App extends React.Component {
   //The state is then updated
   //The function is designed to support being scaled up indefinately
   changePage (newPage) {
+    this.loadPosts();
     let toUpdate = {};
     for(let key in this.state.page){
       toUpdate[key] = false;
