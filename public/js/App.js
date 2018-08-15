@@ -307,7 +307,8 @@ class App extends React.Component {
     .then(jsonedPost => {
       this.loadPosts();
       this.setState({ selectedPost: jsonedPost });
-      this.changePage("postShow");
+      // setTimeout(() => {this.changePage("postShow"); console.log(this.state.selectedPost);}, 5000);
+      this.changePage("postList");
     })
   }
 
@@ -425,7 +426,7 @@ class App extends React.Component {
       }
     }
     if(index != -1){
-      this.selectPost(this.state.posts[index], index);      
+      this.selectPost(this.state.posts[index], index);
     }
   }
 
