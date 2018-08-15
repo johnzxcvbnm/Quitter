@@ -51,6 +51,7 @@ class App extends React.Component {
     this.updateComment = this.updateComment.bind(this);
     this.addLike = this.addLike.bind(this);
     this.removeLike = this.removeLike.bind(this);
+    this.postFinder = this.postFinder.bind(this);
   }//End of Constructor
 
   //Function used to load things on page load
@@ -399,21 +400,31 @@ class App extends React.Component {
   //Function is used to delete likes that the user has made
   //Function removes the like from the database then updates the selected post
   removeLike(old_like){
-    console.log("Removing Like");
-    console.log(old_like);
+    // console.log("Removing Like");
+    // console.log(old_like);
     if(!(old_like.id)){
       old_like = this.state.lastLike;
-      console.log("New Old Like");
-      console.log(old_like);
     }
     fetch("/likes/" + old_like.id, {
       method: "DELETE"
     })
     .then(data => {
-      // console.log("Like Deleted");
       this.selectPost(this.state.selectedPost, this.state.selectedPostIndex);
     })
     .catch(error => console.log(error));
+  }
+
+  postFinder(post_id){
+    // console.log("Finding post");
+    // console.log(post_id);
+    let index = -1;
+    for(let i = 0; i < this.state.posts.length; i++){
+      if(this.state.posts[i].id === post_id){
+        index = i;
+        break;
+      }
+    }
+    this.selectPost(this.state.posts[index], index);
   }
 
   //Render to the browser
@@ -493,7 +504,8 @@ class App extends React.Component {
             <UserShow
               loggedUser={this.state.loggedUser}
               selectedUser={this.state.selectedUser}
-              changePage={this.changePage}/>
+              changePage={this.changePage}
+              postFinder={this.postFinder}/>
           : ''
         }
         {/* Create Post Section */}
