@@ -2,7 +2,7 @@
 //Should be dynamic to show either the logged in user page or anyones user page
 class UserShow extends React.Component {
   render() {
-    {console.log(this.props.selectedUser)}
+    {console.log(this.props)}
     return (
       <div className="user_show">
           <h1 className="user_welcome">Welcome to Quitter, {this.props.selectedUser.user_name}</h1>
