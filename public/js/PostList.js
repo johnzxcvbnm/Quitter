@@ -1,5 +1,13 @@
 //Class PostList is used to display all the posts on the main section of the website
 class PostList extends React.Component {
+  constructor(props){
+    super(props);
+  }
+
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+  
   render() {
     return (
       <div className="post">
