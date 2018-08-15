@@ -80,6 +80,7 @@ class App extends React.Component {
   //If successful it logs the returned user into the state creating a session
   //Logged in users are then brought back to the main page (postList)
   createUser(new_user){
+    console.log(new_user)
     fetch("/users", {
       body: JSON.stringify(new_user),
       method: "POST",
@@ -89,9 +90,11 @@ class App extends React.Component {
       }
     })
     .then(createdUser => {
+      console.log(createdUser)
       return createdUser.json()
     })
     .then(jsonedUser => {
+      console.log('created json user')
       this.setUser(jsonedUser);
       this.changePage("postList");
     })

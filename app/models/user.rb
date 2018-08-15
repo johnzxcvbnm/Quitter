@@ -138,19 +138,19 @@ class User
       }
     end
   def self.create(opts)
+    p opts
     results = DB.exec(
         <<-SQL
-            INSERT INTO users (user_name, password, avatar, post_id)
-            VALUES ('#{opts["user_name"]}', '#{opts["password"]}', '#{opts["avatar"]}', '#{opts["post_id"]}')
-            RETURNING id, user_name, password, avatar, post_id;
+            INSERT INTO users (user_name, password, avatar)
+            VALUES ('#{opts["user_name"]}', '#{opts["password"]}', '#{opts["avatar"]}')
+            RETURNING id, user_name, password, avatar;
         SQL
     )
     return {
         "id" => results.first["id"].to_i,
         "user_name" => results.first["user_name"],
         "password" => results.first["password"],
-        "avatar" => results.first["avatar"],
-        "post_id" => results.first["post_id"]
+        "avatar" => results.first["avatar"]
     }
   end
   def self.delete(id)
