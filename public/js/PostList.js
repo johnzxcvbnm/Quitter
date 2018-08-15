@@ -5,6 +5,10 @@ class PostList extends React.Component {
     this.clickedUser = this.clickedUser.bind(this);
   }
 
+  componentDidMount(){
+    window.scrollTo(0, 0);
+  }
+
   clickedUser(id){
     fetch('/users/' + id)
       .then(response => response.json())
