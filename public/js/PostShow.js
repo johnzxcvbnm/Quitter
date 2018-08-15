@@ -64,14 +64,52 @@ class PostShow extends React.Component {
 
 
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     return (
       <div className="post">
         <div className="one_post">
           <div className="content">
-            <h3><b>Content: </b>{this.props.post.post_content}</h3>
-            <h3 ><b>Post Image: </b><img src={this.props.post.image}/></h3>
+
+            <h3>{this.props.post.post_content}</h3>
+            <h3><img src={this.props.post.image}/></h3>
             <h2>{this.props.post.likes_amount} Likes</h2>
+          </div>
+          <div className="buttons">
+            {/* If the user is logged in, allow them to like/comment the post */}
+            {
+              this.props.loggedUser.id != 0 && this.props.post.user_id != -1 && !(this.state.didLike) ?
+                <button className="button is-info" onClick={() => {this.toggleLike(); this.props.addLike();}}>Like Post</button>
+              : ''
+            }
+            {
+              this.props.loggedUser.id != 0 && this.props.post.user_id != -1 && (this.state.didLike) ?
+                <button className="button is-light" onClick={() => {this.props.removeLike(this.state.selectedLike); this.toggleLike();}}>Remove Like</button>
+              : ''
+            }
+            {
+              this.props.loggedUser.id != 0 && this.props.post.user_id != -1 ?
+                <button className="button is-info" onClick={() => { this.selectComment(null);  this.toggleComments();}}>Add Comment</button>
+              : ''
+            }
+            {/* If the user created this post, then allow them to edit it */}
+            {
+              this.props.post.user_id == this.props.loggedUser.id ?
+                  <button
+                    className="button is-info"
+                    onClick={() => this.props.changePage("postEdit") }>
+                      Edit Post
+                  </button>
+              : ''
+            }
+            {
+              this.props.post.user_id == this.props.loggedUser.id ?
+                <button
+                  className="button is-dark"
+                  onClick={() => this.props.deletePost(this.props.post, this.props.postIndex)}>
+                    Delete Post
+                </button>
+              : ''
+            }
           </div>
           <div className="user">
             <
@@ -82,43 +120,6 @@ class PostShow extends React.Component {
             >
               <img src={this.props.post.avatar}/></div>
             <h3>{this.props.post.user_name}</h3>
-          </div>
-          <div className="buttons">
-            {/* If the user created this post, then allow them to edit it */}
-            {
-              this.props.post.user_id == this.props.loggedUser.id ?
-                  <button
-                    className="button is-warning"
-                    onClick={() => this.props.changePage("postEdit") }>
-                      Edit Post
-                  </button>
-              : ''
-            }
-            {
-              this.props.post.user_id == this.props.loggedUser.id ?
-                <button
-                  className="button is-danger"
-                  onClick={() => this.props.deletePost(this.props.post, this.props.postIndex)}>
-                    Delete Post
-                </button>
-              : ''
-            }
-            {/* If the user is logged in, allow them to like/comment the post */}
-            {
-              this.props.loggedUser.id != 0 && this.props.post.user_id != -1 && !(this.state.didLike) ?
-                <button className="button is-link" onClick={() => {this.toggleLike(); this.props.addLike();}}>Like</button>
-              : ''
-            }
-            {
-              this.props.loggedUser.id != 0 && this.props.post.user_id != -1 && (this.state.didLike) ?
-                <button className="button is-light" onClick={() => {this.props.removeLike(this.state.selectedLike); this.toggleLike();}}>Remove Like</button>
-              : ''
-            }
-            {
-              this.props.loggedUser.id != 0 && this.props.post.user_id != -1 ?
-                <button className="button is-link" onClick={() => { this.selectComment(null);  this.toggleComments();}}>Comment</button>
-              : ''
-            }
           </div>
           {/* If the CommentField is hidden (default) then show the list of comments */}
           {

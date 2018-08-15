@@ -446,7 +446,8 @@ class App extends React.Component {
             <span>
               <UserSplash
                 loggedUser={this.state.loggedUser}
-                changePage={this.changePage}/>
+                changePage={this.changePage}
+                changeSelectedUser={this.changeSelectedUser}/>
               <PostList
                 changeSelectedUser={this.changeSelectedUser}
                 posts={this.state.posts}

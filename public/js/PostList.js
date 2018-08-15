@@ -5,6 +5,10 @@ class PostList extends React.Component {
     this.clickedUser = this.clickedUser.bind(this);
   }
 
+  componentDidMount(){
+    window.scrollTo(0, 0);
+  }
+
   clickedUser(id){
     fetch('/users/' + id)
       .then(response => response.json())
@@ -32,8 +36,8 @@ class PostList extends React.Component {
                 className="content"
                 onClick={() => {
                   this.props.selectPost(post, index)}}>
-                <h3><b>Content: </b>{post.post_content}</h3>
-                <h3 ><b>Post Image: </b><img src={post.image}/></h3>
+                <h3>{post.post_content}</h3>
+                <h3><img src={post.image}/></h3>
                 <h2>{post.likes_amount} Likes</h2>
               </div>
               <hr />
