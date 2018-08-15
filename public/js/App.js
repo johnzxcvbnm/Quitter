@@ -424,7 +424,9 @@ class App extends React.Component {
         break;
       }
     }
-    this.selectPost(this.state.posts[index], index);
+    if(index != -1){
+      this.selectPost(this.state.posts[index], index);      
+    }
   }
 
   //Render to the browser
