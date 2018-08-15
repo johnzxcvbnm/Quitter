@@ -515,6 +515,7 @@ class App extends React.Component {
             <PostShow
               loggedUser={this.state.loggedUser}
               changePage={this.changePage}
+              changeSelectedUser={this.changeSelectedUser}
               post={this.state.selectedPost}
               postIndex={this.state.selectedPostIndex}
               deletePost={this.deletePost}
@@ -531,6 +532,7 @@ class App extends React.Component {
             <PostShow
               loggedUser={ {id: 0} }
               changePage={this.changePage}
+              changeSelectedUser={this.changeSelectedUser}
               post={this.state.selectedPost}
               postIndex={this.state.selectedPostIndex}
               deletePost={this.deletePost}/>

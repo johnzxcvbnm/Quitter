@@ -5,6 +5,7 @@ class PostShow extends React.Component {
     super(props);
     this.state = {
       commentField: false,
+      clickedUser: null,
       selectedComment: null,
       didLike: false,
       selectedLike: {}
@@ -13,6 +14,7 @@ class PostShow extends React.Component {
     this.selectComment = this.selectComment.bind(this);
     this.findLike = this.findLike.bind(this);
     this.toggleLike = this.toggleLike.bind(this);
+    this.clickedUser = this.clickedUser.bind(this);
   }
 
   // Function jumps the user to the top of the page (where the post is)
@@ -23,6 +25,15 @@ class PostShow extends React.Component {
 
   toggleLike(){
     this.setState({ didLike: !this.state.didLike })
+  }
+
+  clickedUser(id){
+    fetch('/users/' + id)
+      .then(response => response.json())
+        .then(user => {
+          this.props.changeSelectedUser(user)
+          this.props.changePage("userShow");
+        }).catch(error => console.log(error))
   }
 
 
@@ -50,8 +61,10 @@ class PostShow extends React.Component {
     this.setState({ commentField: !this.state.commentField });
   }
 
+
+
   render() {
-    // console.log(this.props.post)
+    console.log(this.props)
     return (
       <div className="post">
         <div className="one_post">
@@ -61,7 +74,13 @@ class PostShow extends React.Component {
             <h2>{this.props.post.likes_amount} Likes</h2>
           </div>
           <div className="user">
-            <div className="avatar"><img src={this.props.post.avatar}/></div>
+            <
+            div onClick={() => {
+              this.clickedUser(this.props.post.user_id);
+            }}
+              className="avatar"
+            >
+              <img src={this.props.post.avatar}/></div>
             <h3>{this.props.post.user_name}</h3>
           </div>
           <div className="buttons">
