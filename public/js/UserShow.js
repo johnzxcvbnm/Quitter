@@ -25,7 +25,7 @@ class UserShow extends React.Component {
             {this.props.selectedUser.posts.map((post, index) => {
               return (
                 <div className="one_post">
-                  <div className="content">
+                  <div className="content" onClick={() => this.props.postFinder(post.id)}>
                     <p>{post.post_content}</p>
                     <img src={post.img}/>
                   </div>
@@ -43,8 +43,7 @@ class UserShow extends React.Component {
               {this.props.selectedUser.comments.map((comment, index) => {
                 return (
                   <div className="one_comment">
-                    <div className="content">
-                      {console.log({comment})}
+                    <div className="content" onClick={() => this.props.postFinder(comment['post id'])}>
                       <p>{comment.comment_content}</p>
                       <img src={comment.img}/>
                     </div>
