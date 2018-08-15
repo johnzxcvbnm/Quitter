@@ -81,7 +81,7 @@ img {
 }
 
 .field input {
-  height: 30px;
+  /* height: 30px; */
 }
 
 .user_splash {
@@ -204,21 +204,17 @@ span {
   align-items: center;
 }
 
+.user_show div {
+  margin: 0 auto;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+}
 
-
-  .user_show div {
-    margin: 0 auto;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    width: 100%;
-  }
-
-  .user_show h1 {
-    text-align: center;
-    font-size: 50px;
-  }
-
-
+.user_show h1 {
+  text-align: center;
+  font-size: 50px;
+}
 
 .user_show {
   background-color: #05386B;
@@ -279,14 +275,11 @@ span {
   text-align: center;
   box-shadow: 0 0 10px #05386B;
   background-color: #EDF5E1;
-
-
 }
 
 .comment_avatar {
   width: 30%;
   display: inline-block;
-
 }
 
 .comment_avatar img {
