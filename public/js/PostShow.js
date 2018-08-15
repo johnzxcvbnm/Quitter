@@ -64,30 +64,21 @@ class PostShow extends React.Component {
 
 
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     return (
       <div className="post">
         <div className="one_post">
           <div className="content">
-            <h3><b>Content: </b>{this.props.post.post_content}</h3>
-            <h3 ><b>Post Image: </b><img src={this.props.post.image}/></h3>
+
+            <h3>{this.props.post.post_content}</h3>
+            <h3><img src={this.props.post.image}/></h3>
             <h2>{this.props.post.likes_amount} Likes</h2>
-          </div>
-          <div className="user">
-            <
-            div onClick={() => {
-              this.clickedUser(this.props.post.user_id);
-            }}
-              className="avatar"
-            >
-              <img src={this.props.post.avatar}/></div>
-            <h3>{this.props.post.user_name}</h3>
           </div>
           <div className="buttons">
             {/* If the user is logged in, allow them to like/comment the post */}
             {
               this.props.loggedUser.id != 0 && this.props.post.user_id != -1 && !(this.state.didLike) ?
-                <button className="button is-info" onClick={() => {this.toggleLike(); this.props.addLike();}}>Like</button>
+                <button className="button is-info" onClick={() => {this.toggleLike(); this.props.addLike();}}>Like Post</button>
               : ''
             }
             {
@@ -97,7 +88,7 @@ class PostShow extends React.Component {
             }
             {
               this.props.loggedUser.id != 0 && this.props.post.user_id != -1 ?
-                <button className="button is-info" onClick={() => { this.selectComment(null);  this.toggleComments();}}>Comment</button>
+                <button className="button is-info" onClick={() => { this.selectComment(null);  this.toggleComments();}}>Add Comment</button>
               : ''
             }
             {/* If the user created this post, then allow them to edit it */}
@@ -119,6 +110,16 @@ class PostShow extends React.Component {
                 </button>
               : ''
             }
+          </div>
+          <div className="user">
+            <
+            div onClick={() => {
+              this.clickedUser(this.props.post.user_id);
+            }}
+              className="avatar"
+            >
+              <img src={this.props.post.avatar}/></div>
+            <h3>{this.props.post.user_name}</h3>
           </div>
           {/* If the CommentField is hidden (default) then show the list of comments */}
           {

@@ -294,3 +294,11 @@ span {
   height: 80px;
   border-radius: 100px;
 }
+
+.add_top_margin {
+  margin-top: 16px;
+}
+
+.flexy {
+  display: flex;
+}

@@ -5,11 +5,10 @@ class UserShow extends React.Component {
     return (
       <div className="user_show">
           <h1 className="user_welcome">Welcome to Quitter, {this.props.selectedUser.user_name}</h1>
-          <h2>Password: {this.props.selectedUser.password}</h2>
           <img className="user_pic" src={this.props.selectedUser.avatar}/>
           {
             (this.props.selectedUser == this.props.loggedUser)?
-              <button className="button is-link" onClick={() => this.props.changePage("userEdit")}>Edit User</button>
+              <button className="button is-info" onClick={() => this.props.changePage("userEdit")}>Edit User</button>
             : ''
           }
           <div className="user_posts">
