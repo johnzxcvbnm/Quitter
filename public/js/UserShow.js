@@ -19,6 +19,7 @@ class UserShow extends React.Component {
                     <p>{post.post_content}</p>
                     <img src={post.img}/>
                   </div>
+                  <hr />
                 </div>
               )}
             )}
@@ -33,6 +34,7 @@ class UserShow extends React.Component {
                       <p>{comment.comment_content}</p>
                       <img src={comment.img}/>
                     </div>
+                    <hr />
                   </div>
                 )}
           )}
