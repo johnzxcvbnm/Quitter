@@ -388,6 +388,7 @@ class App extends React.Component {
       return createdLike.json()
     })
     .then(jsonedLike => {
+      this.loadPosts();
       this.setState({ lastLike: jsonedLike });
       this.selectPost(this.state.selectedPost, this.state.selectedPostIndex);
     })
@@ -397,18 +398,16 @@ class App extends React.Component {
   //Function is used to delete likes that the user has made
   //Function removes the like from the database then updates the selected post
   removeLike(old_like){
-    console.log("Removing Like");
-    console.log(old_like);
+    // console.log("Removing Like");
+    // console.log(old_like);
     if(!(old_like.id)){
       old_like = this.state.lastLike;
-      console.log("New Old Like");
-      console.log(old_like);
     }
     fetch("/likes/" + old_like.id, {
       method: "DELETE"
     })
     .then(data => {
-      // console.log("Like Deleted");
+      this.loadPosts();
       this.selectPost(this.state.selectedPost, this.state.selectedPostIndex);
     })
     .catch(error => console.log(error));

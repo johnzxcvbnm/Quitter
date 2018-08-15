@@ -1,4 +1,17 @@
 class CommentList extends React.Component {
+  constructor(props){
+    super(props);
+
+  }
+
+  componentDidMount(){
+    console.log(this.props.post.comments);
+    if(!(this.props.post)){
+      this.props["post"] = {
+        comments: []
+      }
+    }
+  }
   render() {
     return (
       <div className="post_comment_container">
