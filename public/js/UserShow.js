@@ -19,10 +19,6 @@ class UserShow extends React.Component {
                     <p>{post.post_content}</p>
                     <img src={post.img}/>
                   </div>
-                  <div className="user">
-                    <div className="avatar"><img src={post.avatar}/></div>
-                    <h3>{post.user_name}</h3>
-                  </div>
                 </div>
               )}
             )}

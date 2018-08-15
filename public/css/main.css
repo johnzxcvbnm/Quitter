@@ -204,21 +204,17 @@ span {
   align-items: center;
 }
 
+.user_show div {
+  margin: 0 auto;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+}
 
-
-  .user_show div {
-    margin: 0 auto;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    width: 100%;
-  }
-
-  .user_show h1 {
-    text-align: center;
-    font-size: 50px;
-  }
-
-
+.user_show h1 {
+  text-align: center;
+  font-size: 50px;
+}
 
 .user_show {
   background-color: #05386B;
@@ -241,7 +237,6 @@ span {
   font-size: 25px;
 }
 
-
 .user_welcome {
   font-size: 40px;
   margin: 0 auto;
@@ -260,15 +255,18 @@ span {
   color: darkorange;
   text-align: center;
 }
+
 .post_comment_container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: space-between;
 }
+
 .post_comment_container div {
   width: 80%;
 }
+
 .post_comment {
   display: flex;
   flex-direction: column;
