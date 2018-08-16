@@ -1,0 +1,302 @@
+/* Custom CSS Page */
+html {
+  /* background: thistle; */
+  /* color: red; */
+}
+body {
+  color: #EDF5E1;
+  display: flex;
+  max-width: 1300px;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  font-family: 'Roboto', sans-serif;
+}
+main {
+  background-color: snow;
+  width: 100%;
+}
+.one_post {
+  color: #05386B;
+  background-color: #8EE4AF;
+  padding-top: 10px;
+}
+
+.one_comment {
+  color: #05386B;
+  background-color: #8EE4AF;
+  padding-top: 10px;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #8EE4AF;
+  width: 100%;
+}
+
+.nav {
+  color: #05386B;
+  width: 95%;
+  text-align: center;
+  background-color: #8EE4AF;
+  font-weight: 1000;
+  font-size: 20px;
+}
+
+.nav .columns {
+  border-bottom: 3px solid #05386B;
+  margin-bottom: 15px;
+}
+.nav div {
+  background-color: #8EE4AF;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+
+.nav p:hover {
+  color: #EDF5E1;
+}
+
+img {
+  height: 80px;
+}
+.field {
+  background-color: #05386B;
+  padding: 20px;
+  border-radius: 20px;
+  border: 2px solid #EDF5E1;
+  color: #EDF5E1;
+  margin-bottom: 500px;
+  width: 80%;
+}
+
+
+.field label {
+  color: #EDF5E1;
+}
+.field h1 {
+  color: #EDF5E1;
+}
+
+/* .field input {
+  height: 30px;
+} */
+
+.user_splash {
+  background-color: #05386B;
+  padding: 20px;
+  border-radius: 20px;
+  border: 2px solid #EDF5E1;
+  width: 80%;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.user .avatar {
+  margin-left: 10px;
+}
+
+.user h3 {
+  margin-left: 10px;
+}
+
+span {
+  width: 100%;
+}
+
+.post {
+  background-color: #05386B;
+  width: 100%;
+  padding: 20px;
+  border-radius: 20px;
+  border: 2px solid #EDF5E1;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.content {
+  width: 80%;
+  text-align: center;
+  box-shadow: 0 0 10px #05386B;
+  background-color: #EDF5E1;
+}
+
+.avatar {
+  margin-left: 20px;
+}
+
+.post div {
+  margin: 0 auto;
+  border-radius: 10px;
+}
+
+
+.avatar img {
+  background-color: #EDF5E1;
+  border-radius: 100px;
+}
+
+.field input {
+  width: 100%;
+}
+
+.field textarea {
+  min-height: 300px;
+  width: 100%;
+}
+
+.control {
+  margin: 20px 0;
+  border-radius: 10px;
+  background-color: #05386B;
+  text-align: center;
+}
+.submit {
+  background-color: #05386B;
+  margin: 0 auto;
+  text-align: center;
+}
+.submit input {
+  width: 20%;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.footer {
+  border-top: 3px solid #05386B;
+  margin-top: 40px;
+  background: black;
+  height: 50px;
+  width: 100%;
+  color: #379683;
+  background-color: #EDF5E1;
+}
+
+.footer .columns {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.footer a {
+  display: block;
+  text-align: center;
+  color: #379683;
+}
+
+.footer P {
+  color: #05386B;
+}
+
+.footer a:hover {
+  color: #05386B;
+}
+
+.column_is-3 {
+  background-color: red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user_show div {
+  margin: 0 auto;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.user_show h1 {
+  text-align: center;
+  font-size: 50px;
+}
+
+.user_show {
+  background-color: #05386B;
+  width: 100%;
+  padding: 20px;
+  border-radius: 20px;
+  border: 2px solid #EDF5E1;
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user_show .content {
+  width: 80%;
+}
+
+.user_show p {
+  font-size: 25px;
+}
+
+.user_welcome {
+  font-size: 40px;
+  margin: 0 auto;
+}
+
+.user_pic {
+  width: 500px;
+  height: auto;
+}
+
+.user_show button {
+  margin: 40px;
+}
+
+.error_message {
+  color: darkorange;
+  text-align: center;
+}
+
+.post_comment_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: space-between;
+}
+
+.post_comment_container div {
+  width: 80%;
+}
+
+.post_comment {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 0 10px #05386B;
+  background-color: #EDF5E1;
+
+
+}
+
+.comment_avatar {
+  width: 30%;
+  display: inline-block;
+
+}
+
+.comment_avatar img {
+  background-color: #EDF5E1;
+  height: 80px;
+  border-radius: 100px;
+}
+
+.add_top_margin {
+  margin-top: 16px;
+}
+
+.flexy {
+  display: flex;
+}
