@@ -1,27 +1,38 @@
-# README
+# Quitter
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Technologies Used
+  - React
+  - Ruby on Rails
+  - Postgres
+  - Javascript
+  - HTML
+  - CSS
 
-Things you may want to cover:
+## Description
+    Quitter is a social media app for the non-committal type. Feel free to communicate with everyone on Quitter about the things that you've failed to get done. We would love to chat... wait, I'm just going to stop there. I've told you enough.
 
-* Ruby version
+## ERDs
+    ![ERDs](https://imgur.com/a/4CntojN "ERDs")
 
-* System dependencies
+## Wireframes
+    ![Index](https://imgur.com/eWUutEv "Index")
+    ![Show](https://imgur.com/1nMq7O5 "Show Page")
+    ![Log-in](https://imgur.com/6I2mbFl "Log-in")
 
-* Configuration
+## Unsolved Issues
+    - We would love to add a friend functionality, but we didn't get around to it. I guess we are Quitters now too.
 
-* Database creation
+## Developers
+    - Joseph Weber
+      - https://github.com/joseph-weber
+    - John Kusching
+      - https://github.com/johnzxcvbnm
+    - Cordero Dixon
+      - https://12Developer.github.io
 
-* Database initialization
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Github Repository
+  - https://github.com/johnzxcvbnm/Quitter
 
 Heroku Link
 https://quitter-app.herokuapp.com/
