@@ -87,6 +87,9 @@ class App extends React.Component {
       new_user.avatar = "https://robohash.org/quiullamet.png?size=300x300&set=set1";
     }
 
+
+
+
     fetch("/users", {
       body: JSON.stringify(new_user),
       method: "POST",

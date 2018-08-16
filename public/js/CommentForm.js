@@ -24,8 +24,8 @@ class CommentForm extends React.Component {
     //Create a new comment from the form
     //Post ID and user ID are automatically filled in
     const new_comment = {
-      comment_content: this.refs.comment_content.value,
-      image: this.refs.image.value,
+      comment_content: this.refs.comment_content.value.replace(/'/g, ""),
+      image: this.refs.image.value.replace(/'/g, ""),
       user_id: this.props.loggedUser.id,
       post_id: this.props.post.id
     }

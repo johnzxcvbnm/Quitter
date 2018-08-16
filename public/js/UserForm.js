@@ -31,15 +31,19 @@ class UserForm extends React.Component {
 
     //Create new user from the form data
     const new_user = {
-      user_name: this.refs.user_name.value,
-      password: this.refs.password.value,
-      avatar: this.refs.avatar.value
+      user_name: this.refs.user_name.value.replace(/'/g, ""),
+      password: this.refs.password.value.replace(/'/g, ""),
+      avatar: this.refs.avatar.value.replace(/'/g, "")
     }
 
     //If the user is editing their user information, add the user ID to the new_user
     if(this.props.loggedUser){
       new_user["id"] = this.props.loggedUser.id;
     }
+
+    // console.log(new_user.user_name);
+    // console.log(new_user.user_name.replace("'", ""));
+
 
     //Call the ParentClass function with the newly created user
     //Different functions are (Login, Register, and (soon) Edit)

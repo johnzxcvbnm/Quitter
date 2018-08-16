@@ -28,8 +28,8 @@ class PostForm extends React.Component {
     //Create a new post from the input boxes
     //User ID is automatically filled in
     const new_post = {
-      post_content: this.refs.post_content.value,
-      image: this.refs.image.value,
+      post_content: this.refs.post_content.value.replace(/'/g, ""),
+      image: this.refs.image.value.replace(/'/g, ""),
       user_id: this.props.loggedUser.id
     }
 
