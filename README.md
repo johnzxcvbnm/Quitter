@@ -15,9 +15,9 @@
     ![ERDs](https://imgur.com/a/4CntojN "ERDs")
 
 ## Wireframes
-    ![Index](https://imgur.com/eWUutEv "Index")
-    ![Show](https://imgur.com/1nMq7O5 "Show Page")
-    ![Log-in](https://imgur.com/6I2mbFl "Log-in")
+* ![Index](https://imgur.com/eWUutEv "Index")
+* ![Show](https://imgur.com/1nMq7O5 "Show")
+* ![Log-in](https://imgur.com/6I2mbFl "Log-in")
 
 ## Unsolved Issues
     - We would love to add a friend functionality, but we didn't get around to it. I guess we are Quitters now too.
