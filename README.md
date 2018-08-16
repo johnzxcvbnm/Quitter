@@ -12,7 +12,7 @@
     Quitter is a social media app for the non-committal type. Feel free to communicate with everyone on Quitter about the things that you've failed to get done. We would love to chat... wait, I'm just going to stop there. I've told you enough.
 
 ## ERDs
-    ![ERDs](https://imgur.com/a/4CntojN "ERDs")
+    ![ERDs](https://imgur.com/a/4CntojN.png "ERDs")
 
 ## Wireframes
 * ![Index](https://imgur.com/eWUutEv.png "Index")
